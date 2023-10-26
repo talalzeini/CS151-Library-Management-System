@@ -1,4 +1,4 @@
-
+/**Describes a book in the library. */
 public class Book {
 
     private int ISBN;
