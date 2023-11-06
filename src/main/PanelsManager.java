@@ -31,7 +31,17 @@ public class PanelsManager extends JPanel {
         cardLayout.show(cardPanel, "SignUp");
     }
 
-     public void showHomePanel() {
+    public void showHomePanel() {
         cardLayout.show(cardPanel, "Home");
     }
+
+    public void makeProfilePanel(String username) {
+        Profile profilePanel = new Profile(this, username);
+        cardPanel.add(profilePanel, "Profile");  
+    }
+
+    public void showProfilePanel(){
+        cardLayout.show(cardPanel, "Profile");      
+    }
+
 }

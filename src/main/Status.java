@@ -1,4 +1,4 @@
-package src;
+package src.main;
 
 /**Describes different states a book can be in at different times. */
 public enum Status {
