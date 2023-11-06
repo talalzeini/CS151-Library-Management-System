@@ -14,19 +14,36 @@ public class Home extends JPanel {
         String fontFamily = "Avenir";
         Font mainFont = new Font(fontFamily, Font.PLAIN, 14);
         
-        setSize(500, 500);
-        setLayout(new GridLayout(2, 1));
-        setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
+        setSize(600, 600);
+        setLayout(new GridLayout(6, 3));
+        setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
         // Home Title
         JLabel homeTitle = new JLabel("Welcome to LMS");
         homeTitle.setHorizontalAlignment(JLabel.CENTER);
         homeTitle.setFont(new Font(fontFamily, Font.BOLD, 20));
+        homeTitle.setForeground(Color.white);
 
         JButton openProfileButton = new JButton("My Profile");
         openProfileButton.setFont(mainFont);
         openProfileButton.setBackground(Color.WHITE);
         openProfileButton.setOpaque(true);
+
+        // Narrative Genre Button 
+        JButton narrativeButton = new JButton("Narrative");
+        narrativeButton.setFont(mainFont);
+
+        // Novel Genre Button 
+        JButton novelButton = new JButton("Novel");
+        novelButton.setFont(mainFont);
+
+        // Novel Genre Button 
+        JButton scienceFictionButton = new JButton("Science Fiction");
+        scienceFictionButton.setFont(mainFont);
+
+        // Novel Genre Button 
+        JButton thrillerButton = new JButton("Thriller");
+        thrillerButton.setFont(mainFont);
 
         openProfileButton.addActionListener(new ActionListener() {
         @Override
@@ -35,8 +52,28 @@ public class Home extends JPanel {
         }
         });
 
+        add(new JLabel());
         add(homeTitle);
-        add(openProfileButton);
+        add(new JLabel());
 
+        add(openProfileButton);
+        add(new JLabel());
+        add(new JLabel());
+
+        add(narrativeButton);
+        add(new JLabel());
+        add(new JLabel());
+
+        add(novelButton);
+        add(new JLabel());
+        add(new JLabel());
+
+        add(scienceFictionButton);
+        add(new JLabel());
+        add(new JLabel());
+
+        add(thrillerButton);
+        add(new JLabel());
+        add(new JLabel());
     }
 }
