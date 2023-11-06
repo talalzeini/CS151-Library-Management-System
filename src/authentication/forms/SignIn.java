@@ -31,6 +31,7 @@ public class SignIn extends JPanel {
         this.manager = manager;
 
         setLayout(new BorderLayout());
+        UserManager.addTestUser();
 
         String fontFamily = "Avenir";
         Font mainFont = new Font(fontFamily, Font.PLAIN, 14);
@@ -82,6 +83,7 @@ public class SignIn extends JPanel {
                      passwordField.setText("");
                      messageLabel.setText("");
                      manager.showHomePanel();
+                     manager.makeProfilePanel(enteredUsername);
                 }else{
                      messageLabel.setText("Username or password may be incorrect. Username is case sensitive.");
                 }
