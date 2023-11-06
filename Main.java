@@ -1,6 +1,6 @@
-import javax.swing.*;
 
-import main.PanelsManager;
+import javax.swing.*;
+import src.main.*;
 
 public class Main {
     public static void main(String[] args) {

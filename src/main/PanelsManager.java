@@ -1,10 +1,6 @@
-package main;
-
+package src.main;
 import javax.swing.*;
-
-import authentication.*;
-import main.*;
-
+import src.authentication.forms.*;
 import java.awt.*;
 
 public class PanelsManager extends JPanel {
