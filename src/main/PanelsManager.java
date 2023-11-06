@@ -19,6 +19,10 @@ public class PanelsManager extends JPanel {
         cardPanel.add(signUpPanel, "SignUp");
         cardPanel.add(homePanel, "Home");
 
+        signInPanel.setBackground(Color.blue);
+        signUpPanel.setBackground(Color.blue);
+        homePanel.setBackground(Color.blue);
+
         setLayout(new BorderLayout());
         add(cardPanel, BorderLayout.CENTER);
     }
@@ -38,6 +42,7 @@ public class PanelsManager extends JPanel {
     public void makeProfilePanel(String username) {
         Profile profilePanel = new Profile(this, username);
         cardPanel.add(profilePanel, "Profile");  
+        profilePanel.setBackground(Color.blue);
     }
 
     public void showProfilePanel(){

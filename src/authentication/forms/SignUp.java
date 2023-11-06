@@ -36,7 +36,7 @@ public class SignUp extends JPanel {
         Font mainFont = new Font(fontFamily, Font.PLAIN, 14);
         Border fieldBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 
-        setSize(500, 500);
+        setSize(600, 600);
         setLayout(new GridLayout(15, 2));
         setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
@@ -44,27 +44,32 @@ public class SignUp extends JPanel {
         JLabel mainTitle = new JLabel("StudyBuddy - Sign Up");
         mainTitle.setHorizontalAlignment(JLabel.CENTER);
         mainTitle.setFont(new Font(fontFamily, Font.BOLD, 20));
+        mainTitle.setForeground(Color.white);
 
         // First Name 
         JLabel firstNameLabel = new JLabel("First Name:");
+        firstNameLabel.setForeground(Color.white);
         firstNameLabel.setFont(mainFont);
         firstNameField = new JTextField();
         firstNameField.setBorder(fieldBorder);
       
         // Last Name
         JLabel lastNameLabel = new JLabel("Last Name:");
+        lastNameLabel.setForeground(Color.white);
         lastNameLabel.setFont(mainFont);
         lastNameField = new JTextField();
         lastNameField.setBorder(fieldBorder);
 
         // Email
         JLabel emailLabel = new JLabel("Email:");
+        emailLabel.setForeground(Color.white);
         emailLabel.setFont(mainFont);
         emailField = new JTextField();
         emailField.setBorder(fieldBorder);
 
         // Password
         JLabel passwordLabel = new JLabel("Password:");
+        passwordLabel.setForeground(Color.white);
         passwordLabel.setFont(mainFont);
         passwordField = new JPasswordField();
         passwordField.setBorder(fieldBorder);
@@ -78,7 +83,6 @@ public class SignUp extends JPanel {
 
         // Username Label
         usernameLabel = new JLabel("");
-        usernameLabel.setSize(500,500);
         usernameLabel.setHorizontalAlignment(JLabel.CENTER);
         usernameLabel.setFont(new Font(fontFamily, Font.BOLD, 20));
 

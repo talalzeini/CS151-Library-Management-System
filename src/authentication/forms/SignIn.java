@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class SignIn extends JPanel {
     private JTextField usernameField;
     private JPasswordField passwordField;
-    private JButton loginButton;
+    private JButton signInButton;
     private JLabel messageLabel;
     public PanelsManager manager;
 
@@ -37,7 +37,7 @@ public class SignIn extends JPanel {
         Font mainFont = new Font(fontFamily, Font.PLAIN, 14);
         Border fieldBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 
-        setSize(500, 500);
+        setSize(600, 600);
         setLayout(new GridLayout(10, 2));
         setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
@@ -45,16 +45,19 @@ public class SignIn extends JPanel {
         JLabel mainTitle = new JLabel("LMS - Sign In");
         mainTitle.setHorizontalAlignment(JLabel.CENTER);
         mainTitle.setFont(new Font(fontFamily, Font.BOLD, 20));
+        mainTitle.setForeground(Color.white);
 
              // Email
         JLabel usernamelabel = new JLabel("Username:");
         usernamelabel.setFont(mainFont);
+        usernamelabel.setForeground(Color.white);
         usernameField = new JTextField();
         usernameField.setBorder(fieldBorder);
 
         // Password
         JLabel passwordLabel = new JLabel("Password:");
         passwordLabel.setFont(mainFont);
+        passwordLabel.setForeground(Color.white);
         passwordField = new JPasswordField();
         passwordField.setBorder(fieldBorder);
 
@@ -63,14 +66,14 @@ public class SignIn extends JPanel {
         messageLabel.setForeground(Color.red);
         messageLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        // Login Button
-        loginButton = new JButton("Login");
-        loginButton.setFont(mainFont);
-        loginButton.setBorder(fieldBorder);
-        loginButton.setBackground(Color.WHITE);
-        loginButton.setOpaque(true);
+        // Sign In Button
+        signInButton = new JButton("Sign In");
+        signInButton.setFont(mainFont);
+        signInButton.setBorder(fieldBorder);
+        signInButton.setBackground(Color.WHITE);
+        signInButton.setOpaque(true);
 
-                loginButton.addActionListener(new ActionListener() {
+                signInButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String enteredUsername = usernameField.getText();
@@ -119,7 +122,7 @@ public class SignIn extends JPanel {
         add(passwordLabel);
         add(passwordField);
         add(messageLabel);
-        add(loginButton);
+        add(signInButton);
         add(new JLabel());
         add(switchButton);
     }
