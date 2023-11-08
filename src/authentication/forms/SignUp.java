@@ -16,6 +16,8 @@ import src.main.UserManager;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Random;
 
 public class SignUp extends JPanel {
@@ -74,6 +76,27 @@ public class SignUp extends JPanel {
         passwordField = new JPasswordField();
         passwordField.setBorder(fieldBorder);
 
+        passwordField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                passwordField.setEchoChar((char) 0);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                try {
+                    Thread.sleep(30);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException("time error oopsy");
+                }
+                passwordField.setEchoChar('*');
+            }
+        });
+
         // SignUp Button
         signupButton = new JButton("Sign Up");
         signupButton.setFont(mainFont);
@@ -120,6 +143,7 @@ public class SignUp extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 manager.showSignInPanel();
+                clearFields();
             }
         });
 

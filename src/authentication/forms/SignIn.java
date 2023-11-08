@@ -9,6 +9,8 @@ import src.main.User;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class SignIn extends JPanel {
@@ -61,6 +63,27 @@ public class SignIn extends JPanel {
         passwordField = new JPasswordField();
         passwordField.setBorder(fieldBorder);
 
+        passwordField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                passwordField.setEchoChar((char) 0);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                try {
+                    Thread.sleep(30);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException("time error oopsy");
+                }
+                passwordField.setEchoChar('*');
+            }
+        });
+
         // Message Label
         messageLabel = new JLabel("");
         messageLabel.setForeground(Color.red);
@@ -105,6 +128,7 @@ public class SignIn extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 manager.showSignUpPanel();
+                clearPasswordField();
             }
         });
 
@@ -125,5 +149,9 @@ public class SignIn extends JPanel {
         add(signInButton);
         add(new JLabel());
         add(switchButton);
+    }
+
+    private void clearPasswordField(){
+        passwordField.setText("");
     }
 }
