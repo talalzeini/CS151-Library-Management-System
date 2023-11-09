@@ -6,11 +6,13 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 import java.awt.*;
 
 public class Profile extends JPanel {
-      public static User showProfileData(String username) {
+
+    public static User showProfileData(String username) {
         ArrayList<User> users = UserManager.getUsers();
         for (User user : users) {
             if (user.getUsername().equals(username)) {
@@ -18,6 +20,21 @@ public class Profile extends JPanel {
             }
         }
         return null;
+    }
+
+    public void showChangingPasswordFields(JLabel newPasswordLabel, JTextField newPasswordField){
+        newPasswordLabel.setVisible(true);
+        newPasswordField.setVisible(true);
+    }
+
+    public void hideChangingPasswordFields(JLabel newPasswordLabel, JTextField newPasswordField){
+        newPasswordLabel.setVisible(false);
+        newPasswordField.setVisible(false);
+    }
+
+    public void updatePassword(User signedInUser, String newPassword){
+        signedInUser.setPassword(newPassword);
+        System.out.println("updatePassword function still needs exceptions");
     }
 
     public PanelsManager manager;
@@ -29,16 +46,14 @@ public class Profile extends JPanel {
         Border fieldBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 
         setSize(600, 600);
-        setLayout(new GridLayout(10, 2));
+        setLayout(new GridLayout(13, 2));
         setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
-
 
         User signedInUser = showProfileData(username);
         String firstName = signedInUser.getFirstName();
         String lastName = signedInUser.getLastName();
         String usernameString = signedInUser.getUsername();
         String email = signedInUser.getEmail();
-        String password = signedInUser.getPassword();
 
         // App Label
         JLabel mainTitle = new JLabel("StudyBuddy - Welcome " + firstName);
@@ -46,38 +61,79 @@ public class Profile extends JPanel {
         mainTitle.setFont(new Font(fontFamily, Font.BOLD, 20));
         mainTitle.setForeground(Color.white);
 
+        // First Name Label
         JLabel firstNameLabel = new JLabel("First Name: " + firstName);
         firstNameLabel.setHorizontalAlignment(JLabel.LEFT);
         firstNameLabel.setFont(mainFont);
         firstNameLabel.setForeground(Color.white);
 
+        // Last Name Label
         JLabel lastNameLabel = new JLabel("Last Name: " + lastName);
         lastNameLabel.setHorizontalAlignment(JLabel.LEFT);
         lastNameLabel.setFont(mainFont);
         lastNameLabel.setForeground(Color.white);
 
+        // Username Label
         JLabel usernameLabel = new JLabel("Username: " + usernameString);
         usernameLabel.setHorizontalAlignment(JLabel.LEFT);
         usernameLabel.setFont(mainFont);
         usernameLabel.setForeground(Color.white);
 
+        // Email Label
         JLabel emailLabel = new JLabel("Email: " + email);
         emailLabel.setHorizontalAlignment(JLabel.LEFT);
         emailLabel.setFont(mainFont);
         emailLabel.setForeground(Color.white);
 
-        JLabel passwordLabel = new JLabel("Password: " + password);
-        passwordLabel.setHorizontalAlignment(JLabel.LEFT);
-        passwordLabel.setFont(mainFont);
-        passwordLabel.setForeground(Color.white);
+        // Password Label
+        // JLabel passwordLabel = new JLabel("Password: " + password);
+        // passwordLabel.setHorizontalAlignment(JLabel.LEFT);
+        // passwordLabel.setFont(mainFont);
+        // passwordLabel.setForeground(Color.white);
 
-        JButton switchButton = new JButton("Log Out");
-        switchButton.setFont(mainFont);
-        switchButton.setBorder(fieldBorder);
-        switchButton.setBackground(Color.WHITE);
-        switchButton.setOpaque(true);
 
-        switchButton.addActionListener(new ActionListener() {
+        // New Password Label
+        JLabel newPasswordLabel = new JLabel("New Password: ");
+        newPasswordLabel.setHorizontalAlignment(JLabel.LEFT);
+        newPasswordLabel.setFont(mainFont);
+        newPasswordLabel.setForeground(Color.white);
+
+        // New Password Field
+        JTextField newPasswordField = new JTextField();
+        newPasswordField.setBorder(fieldBorder);
+        setVisible(false);
+
+        // Change Password Button
+        JButton changePasswordButton = new JButton("Change Password");
+        changePasswordButton.setFont(mainFont);
+        changePasswordButton.setBorder(fieldBorder);
+        changePasswordButton.setBackground(Color.WHITE);
+        changePasswordButton.setOpaque(true);
+
+        hideChangingPasswordFields(newPasswordLabel, newPasswordField);
+
+        changePasswordButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(newPasswordLabel.isVisible()){
+                    updatePassword(signedInUser, newPasswordField.getText());
+                    System.out.println("Changed Password Successfully");
+                }else{
+                    showChangingPasswordFields(newPasswordLabel, newPasswordField);
+                    System.out.println("Changed Password Show");
+                }
+                
+            }
+        });
+
+        // LogOut Button
+        JButton LogOutButton = new JButton("Log Out");
+        LogOutButton.setFont(mainFont);
+        LogOutButton.setBorder(fieldBorder);
+        LogOutButton.setBackground(Color.WHITE);
+        LogOutButton.setOpaque(true);
+
+        LogOutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 manager.showSignInPanel();
@@ -89,7 +145,12 @@ public class Profile extends JPanel {
         add(lastNameLabel);
         add(usernameLabel);
         add(emailLabel);
-        add(passwordLabel);
-        add(switchButton);
+        // add(passwordLabel);
+        add(changePasswordButton);
+        add(new JLabel());
+        add(newPasswordLabel);
+        add(newPasswordField);
+        add(new JLabel());
+        add(LogOutButton);
     }
 }
