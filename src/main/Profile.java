@@ -6,6 +6,10 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -99,9 +103,30 @@ public class Profile extends JPanel {
         newPasswordLabel.setForeground(Color.white);
 
         // New Password Field
-        JTextField newPasswordField = new JTextField();
+        JPasswordField newPasswordField = new JPasswordField();
         newPasswordField.setBorder(fieldBorder);
         setVisible(false);
+
+        newPasswordField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                newPasswordField.setEchoChar((char) 0);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                try {
+                    Thread.sleep(30);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException("time error oopsy");
+                }
+                newPasswordField.setEchoChar('*');
+            }
+        });
 
         // Change Password Button
         JButton changePasswordButton = new JButton("Change Password");

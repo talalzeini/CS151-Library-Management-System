@@ -49,7 +49,7 @@ public class SignIn extends JPanel {
         mainTitle.setFont(new Font(fontFamily, Font.BOLD, 20));
         mainTitle.setForeground(Color.white);
 
-             // Email
+        // Email
         JLabel usernamelabel = new JLabel("Username:");
         usernamelabel.setFont(mainFont);
         usernamelabel.setForeground(Color.white);
