@@ -4,9 +4,9 @@ package src.main;
 public enum Status {
     CHECKED_IN,
     CHECKED_OUT,
-    OUT_FOR_DELIVERY,
-    READY_FOR_PICKUP,
-    LOST,
-    UNAVAILABLE;
+    // OUT_FOR_DELIVERY,
+    // READY_FOR_PICKUP,
+    // LOST,
+    // UNAVAILABLE;
     
 }
