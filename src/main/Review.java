@@ -1,0 +1,6 @@
+package src.main;
+
+/**Describes a book review written by a user for a specific title. */
+public class Review {
+    
+}
