@@ -17,7 +17,7 @@ public class Author {
     private ArrayList<Genre> favoriteGenres;
     private ArrayList<Topic> favoriteTopics;
 
-
+    private int likes;
     private int summary;
     private File profilePicture; //directory + icon?
 
@@ -102,7 +102,7 @@ public class Author {
      * what is this method?
      */
     public void addLikes(User u) {
-
+        likes+=1;
     }
 
     public void addFavoritedUser(User u){
