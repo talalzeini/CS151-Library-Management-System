@@ -91,7 +91,7 @@ public class SignIn extends JPanel {
 
         // Message Label
         messageLabel = new JLabel("");
-        messageLabel.setForeground(Color.red);
+        messageLabel.setForeground(new Color(230,48,79));
         messageLabel.setHorizontalAlignment(JLabel.CENTER);
 
         // Sign In Button

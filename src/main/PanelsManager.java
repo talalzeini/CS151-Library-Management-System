@@ -12,7 +12,8 @@ public class PanelsManager extends JPanel {
 
     private CardLayout cardLayout;
     private JPanel cardPanel;
-    
+    private Color defaultBackgroundColor;
+
     public PanelsManager() {
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
@@ -25,9 +26,10 @@ public class PanelsManager extends JPanel {
         cardPanel.add(signUpPanel, "SignUp");
         cardPanel.add(homePanel, "Home");
 
-        signInPanel.setBackground(Color.blue);
-        signUpPanel.setBackground(Color.blue);
-        homePanel.setBackground(Color.blue);
+        defaultBackgroundColor = new Color(58,162,166);
+        signInPanel.setBackground(defaultBackgroundColor);
+        signUpPanel.setBackground(defaultBackgroundColor);
+        homePanel.setBackground(defaultBackgroundColor);
 
         setLayout(new BorderLayout());
         add(cardPanel, BorderLayout.CENTER);
@@ -48,7 +50,7 @@ public class PanelsManager extends JPanel {
     public void makeProfilePanel(String username) {
         Profile profilePanel = new Profile(this, username);
         cardPanel.add(profilePanel, "Profile");  
-        profilePanel.setBackground(Color.blue);
+        profilePanel.setBackground(defaultBackgroundColor);
     }
 
     public void showProfilePanel(){
@@ -58,7 +60,7 @@ public class PanelsManager extends JPanel {
     public void makeSearchPanel() {
         SearchBooks searchPanel = new SearchBooks(this);
         cardPanel.add(searchPanel, "Search");  
-        searchPanel.setBackground(Color.blue);
+        searchPanel.setBackground(defaultBackgroundColor);
     }
 
     public void showSearchPanel(){

@@ -124,6 +124,7 @@ public class SignUp extends JPanel {
                 
                 if(username != null){
                     checkPasswordRequirements(password);
+                    usernameLabel.setText(username);
                     clearFields();
                     User newUser = new User(firstName, lastName, username, email, password);
                     Library.addUser(newUser);
@@ -181,9 +182,7 @@ public class SignUp extends JPanel {
             char lastChar = lastName.charAt(0);
             int randomDigits = new Random().nextInt(9000) + 1000; // Generate a 4-digit random number
 
-            String username = String.format("%C%C-%04d", firstChar, lastChar, randomDigits);
-            usernameLabel.setText("Username: " + username);
-            return username;
+            return String.format("%C%C-%04d", firstChar, lastChar, randomDigits);
         }else{
             // Error Signing Up
             return null;

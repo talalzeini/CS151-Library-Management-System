@@ -68,7 +68,7 @@ public class Profile extends JPanel {
         String email = signedInUser.getEmail();
 
         // App Label
-        JLabel mainTitle = new JLabel("Welcome Back" + firstName);
+        JLabel mainTitle = new JLabel("Welcome Back, " + firstName);
         mainTitle.setHorizontalAlignment(JLabel.CENTER);
         mainTitle.setFont(new Font(fontFamily, Font.BOLD, 20));
         mainTitle.setForeground(Color.white);
@@ -149,8 +149,14 @@ public class Profile extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(newPasswordLabel.isVisible()){
-                    updatePassword(signedInUser, newPasswordField.getPassword());
-                    // Changed Password Successfully
+                    //TODO: run a password checker here for new password vailidty
+                    // aka password needs to be non-null & valid
+                    if (newPasswordField.getPassword() != null) {
+                        // Changed Password Successfully
+                        updatePassword(signedInUser, newPasswordField.getPassword());
+                    } else {
+                        hideChangingPasswordFields(newPasswordLabel, newPasswordField);
+                    }
                 }else{
                     showChangingPasswordFields(newPasswordLabel, newPasswordField);
                 }
