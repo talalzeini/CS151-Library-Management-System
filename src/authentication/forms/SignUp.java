@@ -11,13 +11,16 @@ import src.authentication.exceptions.SpecialCharacterMissing;
 import src.authentication.exceptions.UpperCaseCharacterMissing;
 import src.main.PanelsManager;
 import src.main.User;
-import src.main.UserManager;
+import src.main.Library;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Random;
 
 public class SignUp extends JPanel {
@@ -123,8 +126,7 @@ public class SignUp extends JPanel {
                     checkPasswordRequirements(password);
                     clearFields();
                     User newUser = new User(firstName, lastName, username, email, password);
-                    UserManager.addUser(newUser);
-                    // printUserList();
+                    Library.addUser(newUser);
                 }
             }catch (PasswordException pe) {
             // Display the appropriate error message on the screen
@@ -183,7 +185,7 @@ public class SignUp extends JPanel {
             usernameLabel.setText("Username: " + username);
             return username;
         }else{
-            System.out.println("Erorr");
+            // Error Signing Up
             return null;
         }
     }
