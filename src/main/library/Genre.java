@@ -1,4 +1,4 @@
-package src.main;
+package src.main.library;
 /**The genre of a book. A book must have at least one genre. */
 public enum Genre {
     FANTASY,

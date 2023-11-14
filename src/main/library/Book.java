@@ -1,4 +1,4 @@
-package src.main;
+package src.main.library;
 
 import java.io.File;
 
@@ -10,14 +10,16 @@ public class Book {
     private String author;
     private File content;
     private Status status;
+    private Genre genre;
     private int libraryID;
     private static int libraryIDCounter = 0;
 
 
-    public Book(String t, String a, String num, File content) {
+    public Book(String t, String a, String num, Genre genre, File content) {
         title = t;
         author = a;
         ISBN = num;
+        this.genre = genre;
         this.content = content;
         this.status = Status.CHECKED_IN;
         libraryID = libraryIDCounter;
@@ -68,6 +70,9 @@ public class Book {
         return libraryID;
     }
 
+    public Genre getGenre(){
+        return genre;
+    }
 
     
 }

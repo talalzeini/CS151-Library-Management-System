@@ -3,8 +3,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 import src.main.PanelsManager;
-import src.main.Library;
-import src.main.User;
+import src.main.library.Library;
+import src.main.library.User;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,14 +21,18 @@ public class SignIn extends JPanel {
     public PanelsManager manager;
     public String currentUsername;
 
-    public static boolean isEmailInList(ArrayList<User> userList, String enteredUsername, String enteredPassword) {
+    public static boolean isEmailInList(ArrayList<User> userList, String enteredUsername, char[] enteredPassword) {
         for (User user : userList) {
-            if (user.getUsername().equals(enteredUsername) && user.getPassword().equals(enteredPassword)) {
+            // Convert char array to String for comparison
+            String passwordString = new String(enteredPassword);
+
+            if (user.getUsername().equals(enteredUsername) && user.getPassword().equals(passwordString)) {
                 return true; // Match found
             }
         }
         return false; // No match found
     }
+
 
     public SignIn(PanelsManager manager) {
         this.manager = manager;
@@ -101,7 +105,7 @@ public class SignIn extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String enteredUsername = usernameField.getText();
-                String enteredPassword = passwordField.getText();
+                char[] enteredPassword = passwordField.getPassword();
 
                 ArrayList<User> users = Library.getUsers();
                 if(isEmailInList(users, enteredUsername, enteredPassword) == true){
@@ -110,6 +114,7 @@ public class SignIn extends JPanel {
                      messageLabel.setText("");
                      manager.showHomePanel();
                      manager.makeProfilePanel(enteredUsername);
+                     manager.makeSearchPanel();
                      currentUsername= enteredUsername;
         
                 }else{
