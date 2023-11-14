@@ -63,10 +63,10 @@ public class Library {
     }
 
     /* Returns a list of books containing the given name in the title */
-    public ArrayList<Book> searchByName(String name){
+    public static ArrayList<Book> searchByTitle(String title){
         ArrayList<Book> returnal = new ArrayList<Book>();
         for(Book b : bookInventory){
-            if(b.getTitle().contains(name)){
+            if(b.getTitle().contains(title)){
                 returnal.add(b);
             }
         }

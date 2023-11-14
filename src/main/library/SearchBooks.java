@@ -18,18 +18,57 @@ import java.awt.*;
 
 public class SearchBooks extends JPanel {
 
-    public static JLabel showBooksByISBN(String searchedISBN) {
-        Book searchedBook = Library.searchByISBN(searchedISBN);
-        System.out.println(searchedBook.getTitle());
+    public static ArrayList<JLabel> labels = new ArrayList<>();
 
-        String bookString = searchedBook.getTitle() + ", " + searchedBook.getAuthor() + ", " + searchedBook.getISBN();
+    public static JLabel searchBook(String searchedText) {
+    // Trim the input string
+    String trimmedISBN = searchedText.trim();
 
-        JLabel bookInfo = new JLabel(bookString);
-        bookInfo.setHorizontalAlignment(JLabel.CENTER); 
-        bookInfo.setFont(new Font("Avenir", Font.BOLD, 14));
-        bookInfo.setForeground(Color.white);
+    JLabel bookInfo = new JLabel();
+    bookInfo.setHorizontalAlignment(JLabel.CENTER); 
+    bookInfo.setFont(new Font("Avenir", Font.BOLD, 14));
+    bookInfo.setForeground(Color.white);
+
+
+    // Check if the trimmed string is a number
+    if (trimmedISBN.matches("\\d+")) {
+        // It's a number, proceed with searching
+        Book searchedBook = Library.searchByISBN(trimmedISBN);
+
+        // Check if the book is found
+        if (searchedBook != null) {
+            String bookString = searchedBook.getTitle() + ", " + searchedBook.getAuthor() + ", " + searchedBook.getISBN();
+            bookInfo.setText(bookString);
+        } else {
+             bookInfo.setText("Book not found for ISBN: " + trimmedISBN);
+        }
+    } else {
+        ArrayList<Book> searchedBooks = Library.searchByTitle(searchedText);
+
+       if (!searchedBooks.isEmpty()) {
+            // Iterate through the first 5 books
+
+            if(searchedBooks.size() > 5){
+                int count = 0;
+                for (Book searchedBook : searchedBooks) {
+                    if (count < 5) {
+                        String bookString = searchedBook.getTitle() + ", " + searchedBook.getAuthor() + ", " + searchedBook.getISBN();
+                        labels.add(new JLabel(bookString));
+                        count++;
+                    } else {
+                        break; // Stop after iterating through the first 5 books
+                    }
+                }
+            }
+
+            bookInfo.setText("Book not found for ISBN: " + trimmedISBN);
+
+        } else {
+            // No books found for the entered ISBN
+             bookInfo.setText("No books found similar to that title");
+        }
+    }
         return bookInfo;
-
     }
 
     public PanelsManager manager;
@@ -54,7 +93,7 @@ public class SearchBooks extends JPanel {
         searchField.setBorder(fieldBorder);
 
         // Search Button
-        JButton searchButton = new JButton("Hello");
+        JButton searchButton = new JButton("Search");
         searchButton.setBackground(Color.white);
         searchButton.setForeground(Color.black);
 
@@ -64,8 +103,27 @@ public class SearchBooks extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String searchedText = searchField.getText();
                 System.out.println("Searching....");
-                JLabel bookInfo = showBooksByISBN(searchedText);
-                add(bookInfo);
+                JLabel bookInfoLabel = searchBook(searchedText);
+
+                // Trim the input string
+                String trimmedISBN = searchedText.trim();
+
+                // Check if the trimmed string is a number
+                if (trimmedISBN.matches("\\d+")) {
+                      add(bookInfoLabel);
+                }else{
+                    for (JLabel label : labels){
+                            JLabel bookInfo = new JLabel(label.getText());
+                            bookInfo.setHorizontalAlignment(JLabel.CENTER); 
+                            bookInfo.setFont(new Font("Avenir", Font.BOLD, 14));
+                            bookInfo.setForeground(Color.white);
+                            add(bookInfo);
+                    }
+                     labels.clear();
+                }
+
+                validate();
+                 repaint();
             }
         });
 
