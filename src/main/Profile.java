@@ -17,7 +17,7 @@ import java.awt.*;
 public class Profile extends JPanel {
 
     public static User showProfileData(String username) {
-        ArrayList<User> users = UserManager.getUsers();
+        ArrayList<User> users = Library.getUsers();
         for (User user : users) {
             if (user.getUsername().equals(username)) {
                 return user; // Match found
@@ -38,7 +38,7 @@ public class Profile extends JPanel {
 
     public void updatePassword(User signedInUser, String newPassword){
         signedInUser.setPassword(newPassword);
-        System.out.println("updatePassword function still needs exceptions");
+        // updatePassword function still needs exceptions
     }
 
     public PanelsManager manager;
@@ -142,10 +142,9 @@ public class Profile extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if(newPasswordLabel.isVisible()){
                     updatePassword(signedInUser, newPasswordField.getText());
-                    System.out.println("Changed Password Successfully");
+                    // Changed Password Successfully
                 }else{
                     showChangingPasswordFields(newPasswordLabel, newPasswordField);
-                    System.out.println("Changed Password Show");
                 }
                 
             }

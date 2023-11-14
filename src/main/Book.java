@@ -5,7 +5,7 @@ import java.io.File;
 /**Describes a book in the library. */
 public class Book {
 
-    private int ISBN;
+    private String ISBN;
     private String title;
     private String author;
     private File content;
@@ -14,7 +14,7 @@ public class Book {
     private static int libraryIDCounter = 0;
 
 
-    public Book(String t, String a, int num, File content) {
+    public Book(String t, String a, String num, File content) {
         title = t;
         author = a;
         ISBN = num;
@@ -24,11 +24,11 @@ public class Book {
         libraryIDCounter ++;
     }
 
-    public int getISBN(){
+    public String getISBN(){
         return ISBN;
     }
 
-    public void setISBN(int ISBN){
+    public void setISBN(String ISBN){
         this.ISBN = ISBN;
     }
 

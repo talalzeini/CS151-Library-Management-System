@@ -3,7 +3,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 import src.main.PanelsManager;
-import src.main.UserManager;
+import src.main.Library;
 import src.main.User;
 
 import java.awt.*;
@@ -19,6 +19,7 @@ public class SignIn extends JPanel {
     private JButton signInButton;
     private JLabel messageLabel;
     public PanelsManager manager;
+    public String currentUsername;
 
     public static boolean isEmailInList(ArrayList<User> userList, String enteredUsername, String enteredPassword) {
         for (User user : userList) {
@@ -33,7 +34,7 @@ public class SignIn extends JPanel {
         this.manager = manager;
 
         setLayout(new BorderLayout());
-        UserManager.addTestUser();
+        Library.addTestUser();
 
         String fontFamily = "Avenir";
         Font mainFont = new Font(fontFamily, Font.PLAIN, 14);
@@ -102,14 +103,15 @@ public class SignIn extends JPanel {
                 String enteredUsername = usernameField.getText();
                 String enteredPassword = passwordField.getText();
 
-                ArrayList<User> users = UserManager.getUsers();
-                System.out.println(users);
+                ArrayList<User> users = Library.getUsers();
                 if(isEmailInList(users, enteredUsername, enteredPassword) == true){
                      usernameField.setText("");
                      passwordField.setText("");
                      messageLabel.setText("");
                      manager.showHomePanel();
                      manager.makeProfilePanel(enteredUsername);
+                     currentUsername= enteredUsername;
+        
                 }else{
                      messageLabel.setText("Username or password may be incorrect. Username is case sensitive.");
                 }
