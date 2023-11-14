@@ -1,4 +1,4 @@
-package src.main;
+package src.main.library;
 /**A list of topics that a book can cover, one book can have multiple topics, or none.*/
 public enum Topic {
     POLITICS,

@@ -1,4 +1,4 @@
-package src.main;
+package src.main.library;
 
 import java.io.File;
 import java.lang.reflect.Array;

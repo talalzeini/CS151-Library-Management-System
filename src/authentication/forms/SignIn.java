@@ -3,8 +3,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 import src.main.PanelsManager;
-import src.main.UserManager;
-import src.main.User;
+import src.main.library.Library;
+import src.main.library.User;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,21 +19,26 @@ public class SignIn extends JPanel {
     private JButton signInButton;
     private JLabel messageLabel;
     public PanelsManager manager;
+    public String currentUsername;
 
-    public static boolean isEmailInList(ArrayList<User> userList, String enteredUsername, String enteredPassword) {
+    public static boolean isEmailInList(ArrayList<User> userList, String enteredUsername, char[] enteredPassword) {
         for (User user : userList) {
-            if (user.getUsername().equals(enteredUsername) && user.getPassword().equals(enteredPassword)) {
+            // Convert char array to String for comparison
+            String passwordString = new String(enteredPassword);
+
+            if (user.getUsername().equals(enteredUsername) && user.getPassword().equals(passwordString)) {
                 return true; // Match found
             }
         }
         return false; // No match found
     }
 
+
     public SignIn(PanelsManager manager) {
         this.manager = manager;
 
         setLayout(new BorderLayout());
-        UserManager.addTestUser();
+        Library.addTestUser();
 
         String fontFamily = "Avenir";
         Font mainFont = new Font(fontFamily, Font.PLAIN, 14);
@@ -49,7 +54,7 @@ public class SignIn extends JPanel {
         mainTitle.setFont(new Font(fontFamily, Font.BOLD, 20));
         mainTitle.setForeground(Color.white);
 
-             // Email
+        // Email
         JLabel usernamelabel = new JLabel("Username:");
         usernamelabel.setFont(mainFont);
         usernamelabel.setForeground(Color.white);
@@ -100,16 +105,18 @@ public class SignIn extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String enteredUsername = usernameField.getText();
-                String enteredPassword = passwordField.getText();
+                char[] enteredPassword = passwordField.getPassword();
 
-                ArrayList<User> users = UserManager.getUsers();
-                System.out.println(users);
+                ArrayList<User> users = Library.getUsers();
                 if(isEmailInList(users, enteredUsername, enteredPassword) == true){
                      usernameField.setText("");
                      passwordField.setText("");
                      messageLabel.setText("");
                      manager.showHomePanel();
                      manager.makeProfilePanel(enteredUsername);
+                     manager.makeSearchPanel();
+                     currentUsername= enteredUsername;
+        
                 }else{
                      messageLabel.setText("Username or password may be incorrect. Username is case sensitive.");
                 }
