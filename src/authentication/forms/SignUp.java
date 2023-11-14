@@ -10,8 +10,8 @@ import src.authentication.exceptions.PasswordException;
 import src.authentication.exceptions.SpecialCharacterMissing;
 import src.authentication.exceptions.UpperCaseCharacterMissing;
 import src.main.PanelsManager;
-import src.main.User;
-import src.main.Library;
+import src.main.library.Library;
+import src.main.library.User;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

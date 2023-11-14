@@ -12,6 +12,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+
+import src.main.library.Library;
+import src.main.library.User;
+
 import java.awt.*;
 
 public class Profile extends JPanel {
@@ -36,10 +40,14 @@ public class Profile extends JPanel {
         newPasswordField.setVisible(false);
     }
 
-    public void updatePassword(User signedInUser, String newPassword){
-        signedInUser.setPassword(newPassword);
-        // updatePassword function still needs exceptions
+    public void updatePassword(User signedInUser, char[] newPassword) {
+        // Convert char array to String
+        String newPasswordString = new String(newPassword);
+        
+        signedInUser.setPassword(newPasswordString);
+        // Add exception handling if needed
     }
+
 
     public PanelsManager manager;
     public Profile(PanelsManager manager, String username){
@@ -60,7 +68,7 @@ public class Profile extends JPanel {
         String email = signedInUser.getEmail();
 
         // App Label
-        JLabel mainTitle = new JLabel("StudyBuddy - Welcome " + firstName);
+        JLabel mainTitle = new JLabel("Welcome Back" + firstName);
         mainTitle.setHorizontalAlignment(JLabel.CENTER);
         mainTitle.setFont(new Font(fontFamily, Font.BOLD, 20));
         mainTitle.setForeground(Color.white);
@@ -141,7 +149,7 @@ public class Profile extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(newPasswordLabel.isVisible()){
-                    updatePassword(signedInUser, newPasswordField.getText());
+                    updatePassword(signedInUser, newPasswordField.getPassword());
                     // Changed Password Successfully
                 }else{
                     showChangingPasswordFields(newPasswordLabel, newPasswordField);

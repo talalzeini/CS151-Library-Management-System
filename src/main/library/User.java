@@ -1,4 +1,4 @@
-package src.main;
+package src.main.library;
 import java.util.ArrayList;
 /** Desribes a user of the library system who reads and discusses books online. */
 public class User {

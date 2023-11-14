@@ -1,9 +1,15 @@
 package src.main;
 import javax.swing.*;
 import src.authentication.forms.*;
+import src.main.library.Library;
+import src.main.library.SearchBooks;
+import src.main.library.User;
+
 import java.awt.*;
+import java.util.ArrayList;
 
 public class PanelsManager extends JPanel {
+
     private CardLayout cardLayout;
     private JPanel cardPanel;
     
@@ -47,6 +53,16 @@ public class PanelsManager extends JPanel {
 
     public void showProfilePanel(){
         cardLayout.show(cardPanel, "Profile");      
+    }
+
+    public void makeSearchPanel() {
+        SearchBooks searchPanel = new SearchBooks(this);
+        cardPanel.add(searchPanel, "Search");  
+        searchPanel.setBackground(Color.blue);
+    }
+
+    public void showSearchPanel(){
+        cardLayout.show(cardPanel, "Search");      
     }
 
 }

@@ -1,6 +1,10 @@
 package src.main;
 import javax.swing.*;
 import javax.swing.border.Border;
+
+import src.main.library.Book;
+import src.main.library.Genre;
+import src.main.library.Library;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -11,37 +15,14 @@ import java.awt.*;
 
 public class Home extends JPanel {
     private PanelsManager manager;
-     private ArrayList<Component> previousComponents = new ArrayList<>();
+    private ArrayList<Component> previousComponents = new ArrayList<>();
+    private static ArrayList<Book> books = Library.getInventory();
 
     // Linking front-end to Genre Enum
     Genre[] genres = Genre.values();
 
+
     private ArrayList<JButton> genreButtons = new ArrayList<>();
-
-     public ArrayList<Book> createList(String filename) throws IOException {
-        ArrayList<Book> books = new ArrayList<>();
-
-        try (FileReader fr = new FileReader(filename);
-             BufferedReader br = new BufferedReader(fr)) {
-
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] bookData = line.split(","); // Assuming data is comma-separated
-
-                // Extracting information to create a Book object
-                String title = bookData[0];
-                String author = bookData[1];
-                String ISBN = bookData[2]; // Assuming ISBN is the third element
-
-                // Create a book object and add it to the list
-                Book book = new Book(title, author, ISBN, null); // 'null' for content, assuming it's not read in this function
-                books.add(book);
-            }
-        }
-
-        return books;
-    }
-
 
     public void showGenreInfo(String genreString, JButton openProfileButton, JLabel homeTitle){
         openProfileButton.setVisible(false);
@@ -54,11 +35,22 @@ public class Home extends JPanel {
         repaint();
     }
 
+    public void addBooksFromFiles(){
+        try{
+            for (Genre genre : genres) {
+                 String genreString = genre.toString();
+                 String fileName = "src/files/books/" + genreString.toLowerCase() + ".txt";
+                 Library.createList(fileName, genre);
+            }
+        } catch (IOException error) {
+            // System.out.println(error);
+        }
+    }
+
     public Home(PanelsManager manager) {
-
-
-
         this.manager = manager;
+
+         addBooksFromFiles();
 
         String fontFamily = "Avenir";
         Font mainFont = new Font(fontFamily, Font.PLAIN, 14);
@@ -129,31 +121,26 @@ public class Home extends JPanel {
             genreButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    try {
                         removeAll();
                         validate();
                         repaint();
 
                         add(homeTitle);
 
-                        ArrayList<Book> books = createList("src/files/books/" + genreString.toLowerCase() + ".txt");
-
                         for (Book book : books) {
-                            String bookTitle = book.getTitle();
-                            String bookAuthor = book.getAuthor();
-                            String bookISBN = book.getISBN();
-                            String bookInfoString = bookTitle + ", " + bookAuthor + ", " + bookISBN;
-                            JLabel bookInfoLabel = new JLabel(bookInfoString);
-                            add(bookInfoLabel);
-                            bookInfoLabel.setForeground(Color.white);
-                            bookInfoLabel.setHorizontalAlignment(JLabel.CENTER);
-                            showGenreInfo(genreString, openProfileButton, homeTitle);
-                            add(backButton);
+                            if(book.getGenre().equals(genre)){
+                                String bookTitle = book.getTitle();
+                                String bookAuthor = book.getAuthor();
+                                String bookISBN = book.getISBN();
+                                String bookInfoString = bookTitle + ", " + bookAuthor + ", " + bookISBN;
+                                JLabel bookInfoLabel = new JLabel(bookInfoString);
+                                add(bookInfoLabel);
+                                bookInfoLabel.setForeground(Color.white);
+                                bookInfoLabel.setHorizontalAlignment(JLabel.CENTER);
+                                showGenreInfo(genreString, openProfileButton, homeTitle);
+                                add(backButton);
+                            }
                         }
-
-                    } catch (IOException error) {
-                        // System.out.println(error);
-                    }
                 }
             });
             
@@ -180,7 +167,7 @@ public class Home extends JPanel {
         searchButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            manager.showProfilePanel();
+            manager.showSearchPanel();
         }
         });
     }
