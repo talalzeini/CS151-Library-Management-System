@@ -13,12 +13,15 @@ import java.awt.event.KeyListener;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
+import src.authentication.exceptions.*;
 import src.main.library.Library;
 import src.main.library.User;
 
 import java.awt.*;
 
 public class Profile extends JPanel {
+
+    private String passwordErrorMessage;
 
     public static User showProfileData(String username) {
         ArrayList<User> users = Library.getUsers();
@@ -46,6 +49,18 @@ public class Profile extends JPanel {
         
         signedInUser.setPassword(newPasswordString);
         // Add exception handling if needed
+    }
+
+    private void checkPasswordRequirements(String password) throws PasswordException {
+        if (password.length() < 8) {throw new Minimum8CharactersRequired();}
+
+        if (!password.matches(".*[A-Z].*")) {throw new UpperCaseCharacterMissing();}
+
+        if (!password.matches(".*[a-z].*")) {throw new LowerCaseCharacterMissing();}
+
+        if (!password.matches(".*[!@#$%^&*()].*")) {throw new SpecialCharacterMissing();}
+
+        if (!password.matches(".*\\d.*")) {throw new NumberCharacterMissing();}
     }
 
 
@@ -138,20 +153,33 @@ public class Profile extends JPanel {
 
         hideChangingPasswordFields(newPasswordLabel, newPasswordField);
 
+        JLabel errorLabel = new JLabel();
+        errorLabel.setHorizontalAlignment(JLabel.CENTER);
+        errorLabel.setFont(new Font(fontFamily, Font.PLAIN, 14));
+        Color successColor = Color.GREEN;
+        Color failColor = new Color(230,48,79);
+
         changePasswordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(newPasswordLabel.isVisible()){
                     if (newPasswordField.getPassword() != null) {
-                        // Changed Password Successfully
-                        updatePassword(signedInUser, newPasswordField.getPassword());
+                        // check password validity
+                        try {
+                            checkPasswordRequirements(new String(newPasswordField.getPassword()));
+                            updatePassword(signedInUser, newPasswordField.getPassword());
+                            errorLabel.setForeground(successColor);
+                            errorLabel.setText("Password changed successfully.");
+                        } catch (PasswordException ex) {
+                            errorLabel.setForeground(failColor);
+                            errorLabel.setText("Invalid password. " + ex.getMessage());
+                        }
                     } else {
                         hideChangingPasswordFields(newPasswordLabel, newPasswordField);
                     }
                 }else{
                     showChangingPasswordFields(newPasswordLabel, newPasswordField);
                 }
-                
             }
         });
 
@@ -188,7 +216,7 @@ public class Profile extends JPanel {
         add(usernameLabel);
         add(emailLabel);
         add(changePasswordButton);
-        add(new JLabel());
+        add(errorLabel); //update this
         add(newPasswordLabel);
         add(newPasswordField);
         add(new JLabel());
