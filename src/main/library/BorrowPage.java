@@ -19,6 +19,8 @@ import java.awt.*;
 
 public class BorrowPage extends JPanel {
 
+        private static String statusMessage;
+
         public static void updateBorrowedBookStatus(Genre genre, String isbn, Status newStatus) throws IOException {
         String genreString = genre.toString();
         String filename = "src/files/books/" + genreString.toLowerCase() + ".txt";
@@ -72,17 +74,12 @@ public class BorrowPage extends JPanel {
 
 
 
-    public static JLabel borrowBookNow(String searchedText) {
+    public static String borrowBookNow(String searchedText) {
 
     // Trim the input string
     String trimmedISBN = searchedText.trim();
 
-    JLabel bookInfo = new JLabel();
-    bookInfo.setHorizontalAlignment(JLabel.CENTER); 
-    bookInfo.setFont(new Font("Avenir", Font.BOLD, 14));
-    bookInfo.setForeground(Color.white);
-
-
+    String bookString = "";
     // Check if the trimmed string is a number
     if (trimmedISBN.matches("\\d+")) {
         // It's a number, proceed with searching
@@ -90,7 +87,6 @@ public class BorrowPage extends JPanel {
 
         // Check if the book is found
         if (searchedBook != null) {
-                String bookString = "";
                 if(searchedBook.geStatus() == Status.CHECKED_IN){
                     try{
                         String bookISBN =  searchedBook.getISBN();
@@ -105,22 +101,23 @@ public class BorrowPage extends JPanel {
             }else if(searchedBook.geStatus() == Status.CHECKED_OUT){
                 bookString = "Apologies. This book is already borrowed by someone else. (or you)";
             }
-            bookInfo.setText(bookString);
         } else {
              // No books found for the entered ISBN
-             bookInfo.setText("Book not found for ISBN: " + trimmedISBN);
+             bookString = "Book not found for ISBN: " + trimmedISBN;
         }
 
 
     } else {
-        bookInfo.setText("Invalid Input. You need to enter the ISBN");
+        bookString = "Invalid Input. You need to enter the ISBN";
     }
-        return bookInfo;
+        return bookString;
     }
 
     public PanelsManager manager;
     public BorrowPage(PanelsManager manager){{
         this.manager = manager;
+
+        statusMessage = "";
 
         String fontFamily = "Avenir";
         Font mainFont = new Font(fontFamily, Font.PLAIN, 14);
@@ -149,13 +146,19 @@ public class BorrowPage extends JPanel {
         borrowButton.setBackground(Color.white);
         borrowButton.setForeground(Color.black);
 
+        //Status message label
+        JLabel bookInfoLabel = new JLabel(statusMessage);
+        bookInfoLabel.setHorizontalAlignment(JLabel.CENTER);
+        bookInfoLabel.setFont(new Font("Avenir", Font.BOLD, 14));
+        bookInfoLabel.setForeground(Color.white);
+
         borrowButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String searchedText = ISBNSearchField.getText();
                 System.out.println("Borrowing....");
-                JLabel bookInfoLabel = borrowBookNow(searchedText);
-                 add(bookInfoLabel);
+                statusMessage = borrowBookNow(searchedText);
+                bookInfoLabel.setText(statusMessage);
                 validate();
                  repaint();
             }
@@ -167,9 +170,7 @@ public class BorrowPage extends JPanel {
                 backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                remove(backButton);
                 manager.showHomePanel();
-                add(backButton);
             }
         });
 
@@ -177,6 +178,7 @@ public class BorrowPage extends JPanel {
         add(ISBNSearchField);
         add(borrowButton);
         add(backButton);
+        add(bookInfoLabel);
     }
 }
 }

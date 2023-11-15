@@ -19,6 +19,7 @@ import java.awt.*;
 
 public class ReturnPage extends JPanel {
 
+    private static String statusMessage;
 
     public static void updateReturnedBookStatus(Genre genre, String isbn, Status newStatus) throws IOException {
         String genreString = genre.toString();
@@ -73,10 +74,12 @@ public class ReturnPage extends JPanel {
 
 
 
-    public static JLabel returnBookNow(String searchedText) {
+    public static String returnBookNow(String searchedText) {
 
     // Trim the input string
     String trimmedISBN = searchedText.trim();
+
+        String bookString = "";
 
     JLabel bookInfo = new JLabel();
     bookInfo.setHorizontalAlignment(JLabel.CENTER); 
@@ -91,7 +94,6 @@ public class ReturnPage extends JPanel {
 
         // Check if the book is found
         if (searchedBook != null) {
-            String bookString = "";
            System.out.print(searchedBook.geStatus()) ;
              System.out.print(Status.CHECKED_OUT) ;
             if(searchedBook.geStatus() == Status.CHECKED_OUT){
@@ -110,21 +112,22 @@ public class ReturnPage extends JPanel {
             }else if(searchedBook.geStatus() == Status.CHECKED_IN){
                 bookString = "Apologies. You can't return this book because you never borrowed it.";
             }
-            bookInfo.setText(bookString);
         } else {
              // No books found for the entered ISBN
-             bookInfo.setText("Book not found for ISBN: " + trimmedISBN);
+            bookString = "Book not found for ISBN: " + trimmedISBN;
         }
     } else {
-        bookInfo.setText("Invalid Input. You need to enter the ISBN");
+        bookString = "Invalid Input. You need to enter the ISBN";
     }
-        return bookInfo;
+        return bookString;
     }
 
 
     public PanelsManager manager;
     public ReturnPage(PanelsManager manager){{
         this.manager = manager;
+
+        statusMessage = "";
 
         String fontFamily = "Avenir";
         Font mainFont = new Font(fontFamily, Font.PLAIN, 14);
@@ -154,13 +157,19 @@ public class ReturnPage extends JPanel {
         returnButton.setBackground(Color.white);
         returnButton.setForeground(Color.black);
 
+        //Status message label
+        JLabel bookInfoLabel = new JLabel(statusMessage);
+        bookInfoLabel.setHorizontalAlignment(JLabel.CENTER);
+        bookInfoLabel.setFont(new Font("Avenir", Font.BOLD, 14));
+        bookInfoLabel.setForeground(Color.white);
+
         returnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String searchedText = ISBNSearchField.getText();
                 System.out.println("Returning....");
-                JLabel bookInfoLabel = returnBookNow(searchedText);
-                 add(bookInfoLabel);
+                statusMessage = returnBookNow(searchedText);
+                bookInfoLabel.setText(statusMessage);
                 validate();
                  repaint();
             }
@@ -171,9 +180,7 @@ public class ReturnPage extends JPanel {
                 backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                remove(backButton);
                 manager.showHomePanel();
-                 add(backButton);
             }
         });
 
@@ -181,6 +188,7 @@ public class ReturnPage extends JPanel {
         add(ISBNSearchField);
         add(returnButton);
         add(backButton);
+        add(bookInfoLabel);
     }
 }
 }
