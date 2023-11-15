@@ -76,6 +76,7 @@ public class SearchBooks extends JPanel {
         this.manager = manager;
 
         String fontFamily = "Avenir";
+        Font mainFont = new Font(fontFamily, Font.PLAIN, 14);
         Border fieldBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 
         setSize(600, 600);
@@ -127,9 +128,22 @@ public class SearchBooks extends JPanel {
             }
         });
 
+        // Back Button
+        JButton backButton = new JButton("Back");
+        backButton.setFont(mainFont);
+                backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                remove(backButton);
+                manager.showHomePanel();
+                add(backButton);
+            }
+        });
+
         add(mainTitle);
         add(searchField);
         add(searchButton);
+        add(backButton);
     }
 }
 }

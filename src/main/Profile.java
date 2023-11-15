@@ -97,13 +97,6 @@ public class Profile extends JPanel {
         emailLabel.setFont(mainFont);
         emailLabel.setForeground(Color.white);
 
-        // Password Label
-        // JLabel passwordLabel = new JLabel("Password: " + password);
-        // passwordLabel.setHorizontalAlignment(JLabel.LEFT);
-        // passwordLabel.setFont(mainFont);
-        // passwordLabel.setForeground(Color.white);
-
-
         // New Password Label
         JLabel newPasswordLabel = new JLabel("New Password: ");
         newPasswordLabel.setHorizontalAlignment(JLabel.LEFT);
@@ -164,6 +157,19 @@ public class Profile extends JPanel {
             }
         });
 
+        // Back Button
+        JButton backButton = new JButton("Back");
+        backButton.setFont(mainFont);
+                backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                remove(backButton);
+                manager.showHomePanel();
+                add(backButton);
+            }
+        });
+        
+
         // LogOut Button
         JButton LogOutButton = new JButton("Log Out");
         LogOutButton.setFont(mainFont);
@@ -183,12 +189,12 @@ public class Profile extends JPanel {
         add(lastNameLabel);
         add(usernameLabel);
         add(emailLabel);
-        // add(passwordLabel);
         add(changePasswordButton);
         add(new JLabel());
         add(newPasswordLabel);
         add(newPasswordField);
         add(new JLabel());
         add(LogOutButton);
+        add(backButton);
     }
 }
