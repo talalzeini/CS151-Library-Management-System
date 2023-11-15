@@ -117,7 +117,7 @@ public class SignIn extends JPanel {
                      manager.makeSearchPanel();
                      manager.makeBorrowPage();
                      manager.makeReturnPage();
-                     currentLibraryCardID= enteredLibraryCardID;
+                     currentLibraryCardID = enteredLibraryCardID;
         
                 }else{
                      messageLabel.setText("LibraryCardID or password may be incorrect. LibraryCardID is case sensitive.");

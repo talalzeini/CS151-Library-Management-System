@@ -23,8 +23,10 @@ import java.util.Random;
 public class SignUp extends JPanel {
     private JTextField firstNameField;
     private JTextField lastNameField;
+    private JTextField roleTextField;
     private JTextField emailField;
     private JPasswordField passwordField;
+    
     private JLabel libraryCardIDLabel;
     private JButton signupButton;
     public PanelsManager manager;
@@ -43,7 +45,7 @@ public class SignUp extends JPanel {
         Border fieldBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 
         setSize(600, 600);
-        setLayout(new GridLayout(17, 2));
+        setLayout(new GridLayout(19, 2));
         setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
         // App Label
@@ -65,6 +67,13 @@ public class SignUp extends JPanel {
         lastNameLabel.setFont(mainFont);
         lastNameField = new JTextField();
         lastNameField.setBorder(fieldBorder);
+
+        // Last Name
+        JLabel roleLabel = new JLabel("Author/Librarian/Member: ");
+        roleLabel.setForeground(Color.white);
+        roleLabel.setFont(mainFont);
+        roleTextField = new JTextField();
+        roleTextField.setBorder(fieldBorder);
 
         // Email
         JLabel emailLabel = new JLabel("Email:");
@@ -125,6 +134,7 @@ public class SignUp extends JPanel {
                 try {
                     String firstName = firstNameField.getText();
                     String lastName = lastNameField.getText();
+                    String role = roleTextField.getText();
                     String email = emailField.getText();
                     String password = passwordField.getText();
                     String libraryCardID = generatelibraryCardID(firstName, lastName, email, password);
@@ -134,7 +144,7 @@ public class SignUp extends JPanel {
                         checkPasswordRequirements(password);
                         libraryCardIDLabel.setText(libraryCardID);
                         clearFields();
-                        User newUser = new User(firstName, lastName, libraryCardID, email, password);
+                        User newUser = new User(firstName, lastName, role, libraryCardID, email, password);
                         Library.addUser(newUser);
                     }
                 }else{
@@ -166,6 +176,8 @@ public class SignUp extends JPanel {
         add(firstNameField);
         add(lastNameLabel);
         add(lastNameField);
+        add(roleLabel);
+        add(roleTextField);
         add(emailLabel);
         add(emailField);
         add(passwordLabel);
