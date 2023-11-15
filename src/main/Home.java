@@ -90,23 +90,21 @@ public class Home extends JPanel {
         returnButton.setHorizontalAlignment(JButton.CENTER);
         returnButton.setBackground(Color.WHITE);
 
-        // Add a "Back" button
+        // Back Button
         JButton backButton = new JButton("Back");
         backButton.setFont(mainFont);
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                      removeAll();
-
-        // Restore the previous components
-        for (Component component : previousComponents) {
-            add(component);
-            component.setVisible(true);
-            homeTitle.setText("Welcome to LMS");
-        }
-
-        validate();
-        repaint();
+                removeAll();
+                // Restore the previous components
+                for (Component component : previousComponents) {
+                    add(component);
+                    component.setVisible(true);
+                    homeTitle.setText("Welcome to LMS");
+                }
+                validate();
+                repaint();
             }
         });
         
@@ -130,6 +128,8 @@ public class Home extends JPanel {
         add(new JLabel());
         add(returnButton);
         add(new JLabel());
+
+        
 
         for (Genre genre : genres) {
             String genreString = genre.toString();
