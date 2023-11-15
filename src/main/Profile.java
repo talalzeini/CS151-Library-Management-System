@@ -224,7 +224,7 @@ public class Profile extends JPanel {
         add(roleLabel);
         add(emailLabel);
         add(changePasswordButton);
-        add(errorLabel); //update this
+        add(errorLabel);
         add(newPasswordLabel);
         add(newPasswordField);
         add(new JLabel());

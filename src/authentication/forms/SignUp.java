@@ -148,6 +148,7 @@ public class SignUp extends JPanel {
                         Library.addUser(newUser);
                     }
                 }else{
+                    libraryCardIDLabel.setText("");
                     errorMessage.setText("Invalid Input. Textfields must not be empty.");
                 }
             }catch (PasswordException pe) {
