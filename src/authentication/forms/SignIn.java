@@ -115,6 +115,8 @@ public class SignIn extends JPanel {
                      manager.showHomePanel();
                      manager.makeProfilePanel(enteredUsername);
                      manager.makeSearchPanel();
+                     manager.makeBorrowPage();
+                     manager.makeReturnPage();
                      currentUsername= enteredUsername;
         
                 }else{

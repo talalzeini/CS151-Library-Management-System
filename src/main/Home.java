@@ -1,14 +1,13 @@
 package src.main;
 import javax.swing.*;
-import javax.swing.border.Border;
 
 import src.main.library.Book;
 import src.main.library.Genre;
 import src.main.library.Library;
+import src.main.library.Status;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.*;
@@ -40,10 +39,10 @@ public class Home extends JPanel {
             for (Genre genre : genres) {
                  String genreString = genre.toString();
                  String fileName = "src/files/books/" + genreString.toLowerCase() + ".txt";
-                 Library.createList(fileName, genre);
+                 Library.createList(fileName, genre, null);
             }
         } catch (IOException error) {
-            // System.out.println(error);
+             System.out.println(error);
         }
     }
 
@@ -77,7 +76,19 @@ public class Home extends JPanel {
         searchButton.setFont(new Font(fontFamily, Font.BOLD, 18));
         searchButton.setHorizontalAlignment(JButton.CENTER);
         searchButton.setBackground(Color.WHITE);
-        searchButton.setForeground(Color.red);
+        searchButton.setForeground(Color.red);   
+        
+        // Borrow Button
+        JButton borrowButton = new JButton("Borrow");
+        borrowButton.setFont(new Font(fontFamily, Font.BOLD, 14));
+        borrowButton.setHorizontalAlignment(JButton.CENTER);
+        borrowButton.setBackground(Color.WHITE);
+
+        // Borrow Button
+        JButton returnButton = new JButton("Return");
+        returnButton.setFont(new Font(fontFamily, Font.BOLD, 14));
+        returnButton.setHorizontalAlignment(JButton.CENTER);
+        returnButton.setBackground(Color.WHITE);
 
         // Add a "Back" button
         JButton backButton = new JButton("Back");
@@ -110,6 +121,14 @@ public class Home extends JPanel {
 
          add(new JLabel());
          add(searchButton);
+        add(new JLabel());
+
+        add(new JLabel());
+        add(borrowButton);
+        add(new JLabel());
+
+        add(new JLabel());
+        add(returnButton);
         add(new JLabel());
 
         for (Genre genre : genres) {
@@ -168,6 +187,21 @@ public class Home extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             manager.showSearchPanel();
+        }
+        });
+
+        borrowButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            manager.showBorrowPage();
+        }
+        });
+
+
+        returnButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            manager.showReturnPage();
         }
         });
     }
