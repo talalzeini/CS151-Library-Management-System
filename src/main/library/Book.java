@@ -1,29 +1,19 @@
 package src.main.library;
 
-import java.io.File;
-
-/**Describes a book in the library. */
 public class Book {
 
     private String ISBN;
     private String title;
     private String author;
-    private File content;
     private Status status;
     private Genre genre;
-    private int libraryID;
-    private static int libraryIDCounter = 0;
 
-
-    public Book(String t, String a, String num, Genre genre, File content) {
-        title = t;
-        author = a;
-        ISBN = num;
+    public Book(String title, String author, String ISBN, Genre genre, Status status) {
+        this.title = title;
+        this.author = author;
+        this.ISBN = ISBN;
         this.genre = genre;
-        this.content = content;
-        this.status = Status.CHECKED_IN;
-        libraryID = libraryIDCounter;
-        libraryIDCounter ++;
+        this.status = status;
     }
 
     public String getISBN(){
@@ -50,14 +40,6 @@ public class Book {
         this.author = author;
     }
 
-    public File read(){
-        return content;
-    }
-
-    public void setContent(File content){
-        this.content = content;
-    }
-
     public Status geStatus(){
         return status;
     }
@@ -66,13 +48,8 @@ public class Book {
         this.status = status;
     }
 
-    public int getID(){
-        return libraryID;
-    }
-
     public Genre getGenre(){
         return genre;
     }
-
     
 }

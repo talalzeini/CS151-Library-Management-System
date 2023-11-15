@@ -1,12 +1,10 @@
 package src.main;
 import javax.swing.*;
 import src.authentication.forms.*;
-import src.main.library.Library;
 import src.main.library.SearchBooks;
-import src.main.library.User;
-
+import src.main.library.BorrowPage;
+import src.main.library.ReturnPage;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class PanelsManager extends JPanel {
 
@@ -67,4 +65,24 @@ public class PanelsManager extends JPanel {
         cardLayout.show(cardPanel, "Search");      
     }
 
+        public void makeBorrowPage() {
+        BorrowPage borrowPagePanel = new BorrowPage(this);
+        cardPanel.add(borrowPagePanel, "BorrowPage");  
+        borrowPagePanel.setBackground(defaultBackgroundColor);
+    }
+
+    public void showBorrowPage(){
+        cardLayout.show(cardPanel, "BorrowPage");      
+    }
+
+    public void makeReturnPage() {
+        ReturnPage ReturnPagePanel = new ReturnPage(this);
+        cardPanel.add(ReturnPagePanel, "ReturnPage");  
+        ReturnPagePanel.setBackground(defaultBackgroundColor);
+    }
+
+    public void showReturnPage(){
+        cardLayout.show(cardPanel, "ReturnPage");      
+    }
+    
 }

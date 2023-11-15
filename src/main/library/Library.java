@@ -41,10 +41,9 @@ public class Library {
         bookInventory.remove(b);
     }
 
-    public static void createList(String filename, Genre genre) throws IOException {
+    public static void createList(String filename, Genre genre, Status status) throws IOException {
         try (FileReader fr = new FileReader(filename);
-
-        BufferedReader br = new BufferedReader(fr)) {
+            BufferedReader br = new BufferedReader(fr)) {
 
             String line;
             while ((line = br.readLine()) != null) {
@@ -54,14 +53,18 @@ public class Library {
                 String title = bookData[0];
                 String author = bookData[1];
                 String ISBN = bookData[2]; // Assuming ISBN is the third element
+                String stringStatus = bookData[3].trim();
+
+                boolean isCheckedIn = Boolean.parseBoolean(stringStatus);
+  
+                System.out.println("'" + stringStatus + "'   "   + "     '" + isCheckedIn + "'");
 
                 // Create a book object and add it to the list
-                Book book = new Book(title, author, ISBN, genre, null); // 'null' for content, assuming it's not read in this function
+                Book book = new Book(title, author, ISBN, genre, isCheckedIn ? Status.CHECKED_IN : Status.CHECKED_OUT);
                 Library.addBook(book);
             }
         }
     }
-
     /* Returns a list of books containing the given name in the title */
     public static ArrayList<Book> searchByTitle(String title){
         ArrayList<Book> returnal = new ArrayList<Book>();
