@@ -1,6 +1,7 @@
 package src.main.library;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -9,12 +10,40 @@ public class Library {
     private static ArrayList<Book> bookInventory = new ArrayList<Book>();
 
     public static void addTestUser() {
-        User testUser = new User("test", "test", "test", "test", "test");
+        User testUser = new User("test", "test", "test", "test", "test", "test");
         userList.add(testUser);
     }
 
     public static void addUser(User user){
         userList.add(user);
+        writeLibraryCardIDToFile(user);
+    }
+
+    public static String getRoleFile(String userRole){
+        if(userRole.toLowerCase().equals("member")){
+            return "members";
+        }
+        else if(userRole.toLowerCase().equals("author")){
+            return "authors";
+        }
+        else if(userRole.toLowerCase().equals("librarian")){
+            return "librarians";
+        }
+        return "";
+    }
+
+    private static void writeLibraryCardIDToFile(User user) {
+        
+        String userRole = user.getRole();
+        System.out.println(userRole);
+         String roleFileString = getRoleFile(userRole);
+          System.out.println(roleFileString);
+    
+        try (FileWriter writer = new FileWriter("src/files/users/" + roleFileString + ".txt", true)) {
+            writer.write(user.getLibraryCardID() + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static ArrayList<User> getUsers() {
@@ -63,6 +92,7 @@ public class Library {
             }
         }
     }
+    
     /* Returns a list of books containing the given name in the title */
     public static ArrayList<Book> searchByTitle(String title){
         ArrayList<Book> returnal = new ArrayList<Book>();

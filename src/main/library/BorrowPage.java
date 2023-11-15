@@ -19,10 +19,6 @@ import java.awt.*;
 
 public class BorrowPage extends JPanel {
 
-
-        public void print(String string){
-            System.out.println(string);
-        }
         public static void updateBorrowedBookStatus(Genre genre, String isbn, Status newStatus) throws IOException {
         String genreString = genre.toString();
         String filename = "src/files/books/" + genreString.toLowerCase() + ".txt";
@@ -114,10 +110,6 @@ public class BorrowPage extends JPanel {
              // No books found for the entered ISBN
              bookInfo.setText("Book not found for ISBN: " + trimmedISBN);
         }
-
-
-
-
 
 
     } else {
