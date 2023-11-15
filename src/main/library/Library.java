@@ -56,8 +56,6 @@ public class Library {
                 String stringStatus = bookData[3].trim();
 
                 boolean isCheckedIn = Boolean.parseBoolean(stringStatus);
-  
-                System.out.println("'" + stringStatus + "'   "   + "     '" + isCheckedIn + "'");
 
                 // Create a book object and add it to the list
                 Book book = new Book(title, author, ISBN, genre, isCheckedIn ? Status.CHECKED_IN : Status.CHECKED_OUT);

@@ -142,8 +142,6 @@ public class Profile extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(newPasswordLabel.isVisible()){
-                    //TODO: run a password checker here for new password vailidty
-                    // aka password needs to be non-null & valid
                     if (newPasswordField.getPassword() != null) {
                         // Changed Password Successfully
                         updatePassword(signedInUser, newPasswordField.getPassword());
