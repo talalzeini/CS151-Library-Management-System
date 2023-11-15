@@ -18,9 +18,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Random;
 
 public class SignUp extends JPanel {
@@ -31,6 +28,10 @@ public class SignUp extends JPanel {
     private JLabel libraryCardIDLabel;
     private JButton signupButton;
     public PanelsManager manager;
+
+    private boolean isEmpty(String str) {
+        return str == null || str.trim().isEmpty();
+    }
     
     public SignUp(PanelsManager manager) {
         this.manager = manager;
@@ -42,11 +43,11 @@ public class SignUp extends JPanel {
         Border fieldBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 
         setSize(600, 600);
-        setLayout(new GridLayout(15, 2));
+        setLayout(new GridLayout(17, 2));
         setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
         // App Label
-        JLabel mainTitle = new JLabel("StudyBuddy - Sign Up");
+        JLabel mainTitle = new JLabel("LMS - Sign Up");
         mainTitle.setHorizontalAlignment(JLabel.CENTER);
         mainTitle.setFont(new Font(fontFamily, Font.BOLD, 20));
         mainTitle.setForeground(Color.white);
@@ -100,6 +101,12 @@ public class SignUp extends JPanel {
             }
         });
 
+        // Error Message
+        JLabel errorMessage = new JLabel();
+        errorMessage.setHorizontalAlignment(JLabel.CENTER);
+        errorMessage.setFont(new Font(fontFamily, Font.BOLD, 14));
+        errorMessage.setForeground(Color.red);
+
         // SignUp Button
         signupButton = new JButton("Sign Up");
         signupButton.setFont(mainFont);
@@ -115,19 +122,23 @@ public class SignUp extends JPanel {
                 signupButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                 try {
-                String firstName = firstNameField.getText();
-                String lastName = lastNameField.getText();
-                String email = emailField.getText();
-                String password = passwordField.getText();
-                String libraryCardID = generatelibraryCardID(firstName, lastName, email, password);
-                
-                if(libraryCardID != null){
-                    checkPasswordRequirements(password);
-                    libraryCardIDLabel.setText(libraryCardID);
-                    clearFields();
-                    User newUser = new User(firstName, lastName, libraryCardID, email, password);
-                    Library.addUser(newUser);
+                try {
+                    String firstName = firstNameField.getText();
+                    String lastName = lastNameField.getText();
+                    String email = emailField.getText();
+                    String password = passwordField.getText();
+                    String libraryCardID = generatelibraryCardID(firstName, lastName, email, password);
+                if(!isEmpty(firstName) || !isEmpty(lastName) || !isEmpty(email)  || !isEmpty(password)){
+                    if(libraryCardID != null){
+                        errorMessage.setText("");
+                        checkPasswordRequirements(password);
+                        libraryCardIDLabel.setText(libraryCardID);
+                        clearFields();
+                        User newUser = new User(firstName, lastName, libraryCardID, email, password);
+                        Library.addUser(newUser);
+                    }
+                }else{
+                    errorMessage.setText("Invalid Input. Textfields must not be empty.");
                 }
             }catch (PasswordException pe) {
             // Display the appropriate error message on the screen
@@ -150,14 +161,6 @@ public class SignUp extends JPanel {
             }
         });
 
-        JButton backHomeButton = new JButton("Home");
-        backHomeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                manager.showHomePanel();
-            }
-        });
-
         add(mainTitle);
         add(firstNameLabel);
         add(firstNameField);
@@ -168,6 +171,8 @@ public class SignUp extends JPanel {
         add(passwordLabel);
         add(passwordField);
         add(new JLabel());
+        add(errorMessage);
+        add(new JLabel());
         add(signupButton);
         add(new JLabel());
         add(switchButton);
@@ -177,7 +182,7 @@ public class SignUp extends JPanel {
     }
 
         private String generatelibraryCardID(String firstName, String lastName, String email, String password) {
-        if (firstName.length() > 0 && lastName.length() > 0 && email.length() > 0 && password.length() > 0) {
+        if (firstName.length() > 0 || lastName.length() > 0 || email.length() > 0 || password.length() > 0) {
             char firstChar = firstName.charAt(0);
             char lastChar = lastName.charAt(0);
             int randomDigits = new Random().nextInt(9000) + 1000; // Generate a 4-digit random number
@@ -189,7 +194,7 @@ public class SignUp extends JPanel {
         }
     }
 
-        private void checkPasswordRequirements(String password) throws PasswordException {
+    private void checkPasswordRequirements(String password) throws PasswordException {
     if (password.length() < 8) {
         throw new Minimum8CharactersRequired();
     }
