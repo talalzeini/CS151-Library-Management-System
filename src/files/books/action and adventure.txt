@@ -1,4 +1,4 @@
-The Hunger Games, Suzanne Collins, 9780439023528, true
+The Hunger Games, Suzanne Collins, 9780439023528,false
 Catching Fire, Suzanne Collins, 9780545586177, true
 Mockingjay, Suzanne Collins, 9780545663267, false
 The Ballad of Songbirds and Snakes, Suzanne Collins, 9781338635171, false
