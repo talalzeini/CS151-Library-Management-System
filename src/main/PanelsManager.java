@@ -45,8 +45,8 @@ public class PanelsManager extends JPanel {
         cardLayout.show(cardPanel, "Home");
     }
 
-    public void makeProfilePanel(String username) {
-        Profile profilePanel = new Profile(this, username);
+    public void makeProfilePanel(String libraryCardID) {
+        Profile profilePanel = new Profile(this, libraryCardID);
         cardPanel.add(profilePanel, "Profile");  
         profilePanel.setBackground(defaultBackgroundColor);
     }

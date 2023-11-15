@@ -23,7 +23,7 @@ public class Profile extends JPanel {
     public static User showProfileData(String username) {
         ArrayList<User> users = Library.getUsers();
         for (User user : users) {
-            if (user.getUsername().equals(username)) {
+            if (user.getLibraryCardID().equals(username)) {
                 return user; // Match found
             }
         }
@@ -64,7 +64,7 @@ public class Profile extends JPanel {
         User signedInUser = showProfileData(username);
         String firstName = signedInUser.getFirstName();
         String lastName = signedInUser.getLastName();
-        String usernameString = signedInUser.getUsername();
+        String usernameString = signedInUser.getLibraryCardID();
         String email = signedInUser.getEmail();
 
         // App Label

@@ -3,10 +3,10 @@ import java.util.ArrayList;
 /** Desribes a user of the library system who reads and discusses books online. */
 public class User {
     
-    /** Name of the user, typically consisting of the First, Last, and username. */
+    /** Name of the user, typically consisting of the First, Last, and libraryCardID. */
     private String firstName;
     private String lastName;
-    private String username;
+    private String libraryCardID;
     /** The set of all books currently borrowed by the user. */
     private ArrayList<Book> borrowedBooks;
     /** The password of each user, to log into an account. */
@@ -59,10 +59,10 @@ public class User {
 
 
 
-      public User(String firstName, String lastName, String username, String email, String password) {
+      public User(String firstName, String lastName, String libraryCardID, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.username = username;
+        this.libraryCardID = libraryCardID;
         this.email = email;
         this.password = password;
     }
@@ -84,12 +84,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getUsername() {
-        return username;
+    public String getLibraryCardID() {
+        return libraryCardID;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLibraryCardID(String libraryCardID) {
+        this.libraryCardID = libraryCardID;
     }
 
     public String getEmail() {

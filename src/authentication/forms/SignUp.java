@@ -28,7 +28,7 @@ public class SignUp extends JPanel {
     private JTextField lastNameField;
     private JTextField emailField;
     private JPasswordField passwordField;
-    private JLabel usernameLabel;
+    private JLabel libraryCardIDLabel;
     private JButton signupButton;
     public PanelsManager manager;
     
@@ -107,10 +107,10 @@ public class SignUp extends JPanel {
         signupButton.setBackground(Color.WHITE);
         signupButton.setOpaque(true);
 
-        // Username Label
-        usernameLabel = new JLabel("");
-        usernameLabel.setHorizontalAlignment(JLabel.CENTER);
-        usernameLabel.setFont(new Font(fontFamily, Font.BOLD, 20));
+        // libraryCardID Label
+        libraryCardIDLabel = new JLabel("");
+        libraryCardIDLabel.setHorizontalAlignment(JLabel.CENTER);
+        libraryCardIDLabel.setFont(new Font(fontFamily, Font.BOLD, 20));
 
                 signupButton.addActionListener(new ActionListener() {
             @Override
@@ -120,13 +120,13 @@ public class SignUp extends JPanel {
                 String lastName = lastNameField.getText();
                 String email = emailField.getText();
                 String password = passwordField.getText();
-                String username = generateUsername(firstName, lastName, email, password);
+                String libraryCardID = generatelibraryCardID(firstName, lastName, email, password);
                 
-                if(username != null){
+                if(libraryCardID != null){
                     checkPasswordRequirements(password);
-                    usernameLabel.setText(username);
+                    libraryCardIDLabel.setText(libraryCardID);
                     clearFields();
-                    User newUser = new User(firstName, lastName, username, email, password);
+                    User newUser = new User(firstName, lastName, libraryCardID, email, password);
                     Library.addUser(newUser);
                 }
             }catch (PasswordException pe) {
@@ -172,11 +172,11 @@ public class SignUp extends JPanel {
         add(new JLabel());
         add(switchButton);
         add(new JLabel());
-        add(usernameLabel);
+        add(libraryCardIDLabel);
         
     }
 
-        private String generateUsername(String firstName, String lastName, String email, String password) {
+        private String generatelibraryCardID(String firstName, String lastName, String email, String password) {
         if (firstName.length() > 0 && lastName.length() > 0 && email.length() > 0 && password.length() > 0) {
             char firstChar = firstName.charAt(0);
             char lastChar = lastName.charAt(0);
