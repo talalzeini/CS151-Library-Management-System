@@ -181,6 +181,7 @@ public class ReturnPage extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 manager.showHomePanel();
+                bookInfoLabel.setText("");
             }
         });
 

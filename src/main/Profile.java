@@ -21,8 +21,6 @@ import java.awt.*;
 
 public class Profile extends JPanel {
 
-    private String passwordErrorMessage;
-
     public static User showProfileData(String username) {
         ArrayList<User> users = Library.getUsers();
         for (User user : users) {
@@ -196,9 +194,10 @@ public class Profile extends JPanel {
                 backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                remove(backButton);
                 manager.showHomePanel();
-                add(backButton);
+                hideChangingPasswordFields(newPasswordLabel, newPasswordField);
+                errorLabel.setText("");
+                newPasswordField.setText("");
             }
         });
         

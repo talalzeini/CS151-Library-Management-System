@@ -171,6 +171,7 @@ public class BorrowPage extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 manager.showHomePanel();
+                bookInfoLabel.setText("");
             }
         });
 
