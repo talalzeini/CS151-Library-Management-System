@@ -65,7 +65,7 @@ public class Profile extends JPanel {
 
 
     public PanelsManager manager;
-    public Profile(PanelsManager manager, String username){
+    public Profile(PanelsManager manager, String libraryCardID){
         this.manager = manager;
 
         String fontFamily = "Avenir";
@@ -73,13 +73,14 @@ public class Profile extends JPanel {
         Border fieldBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 
         setSize(600, 600);
-        setLayout(new GridLayout(13, 2));
+        setLayout(new GridLayout(15, 2));
         setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
-        User signedInUser = showProfileData(username);
+        User signedInUser = showProfileData(libraryCardID);
         String firstName = signedInUser.getFirstName();
         String lastName = signedInUser.getLastName();
-        String usernameString = signedInUser.getLibraryCardID();
+        String libraryCardIDString = signedInUser.getLibraryCardID();
+        String roleString = signedInUser.getRole();
         String email = signedInUser.getEmail();
 
         // App Label
@@ -100,11 +101,17 @@ public class Profile extends JPanel {
         lastNameLabel.setFont(mainFont);
         lastNameLabel.setForeground(Color.white);
 
-        // Username Label
-        JLabel usernameLabel = new JLabel("Username: " + usernameString);
-        usernameLabel.setHorizontalAlignment(JLabel.LEFT);
-        usernameLabel.setFont(mainFont);
-        usernameLabel.setForeground(Color.white);
+        // LibraryCardID Label
+        JLabel libraryCardIDLabel = new JLabel("Library Card ID: " + libraryCardIDString);
+        libraryCardIDLabel.setHorizontalAlignment(JLabel.LEFT);
+        libraryCardIDLabel.setFont(mainFont);
+        libraryCardIDLabel.setForeground(Color.white);
+
+        // Role Label
+        JLabel roleLabel = new JLabel("Role: " + roleString);
+        roleLabel.setHorizontalAlignment(JLabel.LEFT);
+        roleLabel.setFont(mainFont);
+        roleLabel.setForeground(Color.white);
 
         // Email Label
         JLabel emailLabel = new JLabel("Email: " + email);
@@ -213,7 +220,8 @@ public class Profile extends JPanel {
         add(mainTitle);
         add(firstNameLabel);
         add(lastNameLabel);
-        add(usernameLabel);
+        add(libraryCardIDLabel);
+        add(roleLabel);
         add(emailLabel);
         add(changePasswordButton);
         add(errorLabel); //update this
