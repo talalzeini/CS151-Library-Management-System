@@ -84,13 +84,13 @@ public class Home extends JPanel {
         borrowButton.setHorizontalAlignment(JButton.CENTER);
         borrowButton.setBackground(Color.WHITE);
 
-        // Borrow Button
+        // Return Button
         JButton returnButton = new JButton("Return");
         returnButton.setFont(new Font(fontFamily, Font.BOLD, 14));
         returnButton.setHorizontalAlignment(JButton.CENTER);
         returnButton.setBackground(Color.WHITE);
 
-        // Back Button
+        // Back Button, works by adding previous components to a stack and rebuilding them in order.
         JButton backButton = new JButton("Back");
         backButton.setFont(mainFont);
         backButton.addActionListener(new ActionListener() {
@@ -129,7 +129,6 @@ public class Home extends JPanel {
         add(returnButton);
         add(new JLabel());
 
-        
 
         for (Genre genre : genres) {
             String genreString = genre.toString();
