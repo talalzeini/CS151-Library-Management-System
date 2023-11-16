@@ -3,6 +3,9 @@ package src.authentication.forms;
 import javax.swing.*;
 import javax.swing.border.Border;
 
+import src.authentication.exceptions.InvalidRoleException;
+import src.authentication.exceptions.InvalidSignUpException;
+import src.authentication.exceptions.InvalidEmailException;
 import src.authentication.exceptions.LowerCaseCharacterMissing;
 import src.authentication.exceptions.Minimum8CharactersRequired;
 import src.authentication.exceptions.NumberCharacterMissing;
@@ -141,10 +144,29 @@ public class SignUp extends JPanel {
                     String libraryCardID = generatelibraryCardID(firstName, lastName, email, password);
                 if(!isEmpty(firstName) || !isEmpty(lastName) || !isEmpty(email)  || !isEmpty(password)){
                     if(libraryCardID != null){
+                        String trueRole = role.trim().toLowerCase();
+                        try{
+                            if(!trueRole.equals("author") && !trueRole.equals("member") && !trueRole.equals("librarian")){
+                                throw new InvalidRoleException();
+                            }
+
+                            if(!email.contains("@") || !email.contains(".")){
+                                throw new InvalidEmailException("The chosen email is not valid, please try again with a valid email.");
+                            }
+                            for(User u : Library.getUsers()){
+                                if(u.getEmail().equals(email)){
+                                    throw new InvalidEmailException("The chosen email is already in use, please try again with a new email.");
+                                }
+                            }
+                        }catch(InvalidSignUpException invRoleExc){
+                            JOptionPane.showMessageDialog(SignUp.this, invRoleExc.getMessage(), "Error:", JOptionPane.ERROR_MESSAGE);
+                        }
+
                         errorMessage.setText("");
                         checkPasswordRequirements(password);
                         libraryCardIDLabel.setText(libraryCardID);
                         clearFields();
+
                         Role userRole = Role.MEMBER;
                         if (role.equalsIgnoreCase("librarian")){
                             userRole = Role.AUTHOR;

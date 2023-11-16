@@ -84,7 +84,7 @@ public class SearchBooks extends JPanel {
         setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
         // App Label
-        JLabel mainTitle = new JLabel("Hi");
+        JLabel mainTitle = new JLabel("Search for a book by its exact ISBN");
         mainTitle.setHorizontalAlignment(JLabel.CENTER);
         mainTitle.setFont(new Font(fontFamily, Font.BOLD, 20));
         mainTitle.setForeground(Color.white);
