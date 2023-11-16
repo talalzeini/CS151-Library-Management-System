@@ -133,7 +133,7 @@ public class BorrowPage extends JPanel {
         mainTitle.setFont(new Font(fontFamily, Font.BOLD, 20));
         mainTitle.setForeground(Color.white);
 
-        JLabel borrowLabel = new JLabel("Enter your book's ISBN here");
+        JLabel borrowLabel = new JLabel("Enter your book's ISBN here:");
         borrowLabel.setFont(new Font(fontFamily, Font.BOLD, 14));
         borrowLabel.setForeground(Color.white);
 
@@ -176,6 +176,7 @@ public class BorrowPage extends JPanel {
         });
 
         add(mainTitle);
+        add(borrowLabel);
         add(ISBNSearchField);
         add(borrowButton);
         add(backButton);

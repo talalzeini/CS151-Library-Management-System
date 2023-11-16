@@ -186,6 +186,7 @@ public class ReturnPage extends JPanel {
         });
 
         add(mainTitle);
+        add(returnLabel);
         add(ISBNSearchField);
         add(returnButton);
         add(backButton);
