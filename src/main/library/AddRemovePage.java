@@ -56,6 +56,12 @@ public class AddRemovePage extends JPanel {
                     String getBook = ISBNSearchField.getText();
                     String[] bookData = getBook.split(",");
                     Genre genre = Genre.getGenre(bookData[3]);
+                    // Making sure ISBN is unique
+                    for(Book b : Library.getInventory()){
+                        if(b.getISBN().equals(bookData[2])){
+                            throw new Exception();
+                        }
+                    }
                     // title author isbn genre
                     if (bookData.length == 4) {
                         Book book = new Book(bookData[0], bookData[1], bookData[2], genre, Status.CHECKED_IN);
@@ -64,7 +70,7 @@ public class AddRemovePage extends JPanel {
                     }
                 } catch (Exception exc) {
                     System.out.println("invalid book");
-                    bookInfoLabel.setText("Invalid book.\nBook format is: Title, Author, ISBN, Genre");
+                    bookInfoLabel.setText("Invalid book/Repeated ISBN.\nBook format is: Title, Author, ISBN, Genre");
                 }
 
             }
@@ -83,8 +89,9 @@ public class AddRemovePage extends JPanel {
                     System.out.println("removed book");
                     bookInfoLabel.setText("Removed book successfully.");
                     removeBook(remBook);
+                }else{
+                    bookInfoLabel.setText("Book not found.");
                 }
-                bookInfoLabel.setText("Book not found.");
             }
         });
 
