@@ -223,6 +223,7 @@ public class SignUp extends JPanel {
         
     }
 
+        //Genereates LibraryID for Sign In, containing the first initials of first/last name, a dash, and four random digits
         private String generatelibraryCardID(String firstName, String lastName, String email, String password) {
         if (firstName.length() > 0 || lastName.length() > 0 || email.length() > 0 || password.length() > 0) {
             char firstChar = firstName.charAt(0);
@@ -236,6 +237,7 @@ public class SignUp extends JPanel {
         }
     }
 
+    //Makes sure entered password is secure, throws the relevant exception otherwise
     private void checkPasswordRequirements(String password) throws PasswordException {
     if (password.length() < 8) {
         throw new Minimum8CharactersRequired();
@@ -259,6 +261,7 @@ public class SignUp extends JPanel {
 }
 
 
+    //Clears all fields for reuse
     private void clearFields(){
         firstNameField.setText("");
         lastNameField.setText("");
