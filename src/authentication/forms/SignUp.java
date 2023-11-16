@@ -11,6 +11,7 @@ import src.authentication.exceptions.SpecialCharacterMissing;
 import src.authentication.exceptions.UpperCaseCharacterMissing;
 import src.main.PanelsManager;
 import src.main.library.Library;
+import src.main.library.Role;
 import src.main.library.User;
 
 import java.awt.*;
@@ -144,7 +145,13 @@ public class SignUp extends JPanel {
                         checkPasswordRequirements(password);
                         libraryCardIDLabel.setText(libraryCardID);
                         clearFields();
-                        User newUser = new User(firstName, lastName, role, libraryCardID, email, password);
+                        Role userRole = Role.MEMBER;
+                        if (role.equalsIgnoreCase("librarian")){
+                            userRole = Role.AUTHOR;
+                        } else if(role.equalsIgnoreCase("author")){
+                            userRole = Role.LIBRARIAN;
+                        }
+                        User newUser = new User(firstName, lastName, userRole, libraryCardID, email, password);
                         Library.addUser(newUser);
                     }
                 }else{

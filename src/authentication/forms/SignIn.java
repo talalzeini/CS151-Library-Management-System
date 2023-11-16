@@ -4,6 +4,7 @@ import javax.swing.border.Border;
 
 import src.main.PanelsManager;
 import src.main.library.Library;
+import src.main.library.Role;
 import src.main.library.User;
 
 import java.awt.*;
@@ -31,6 +32,18 @@ public class SignIn extends JPanel {
             }
         }
         return false; // No match found
+    }
+
+    public static User isValidLogin(ArrayList<User> userList, String enteredLibraryCardID, char[] enteredPassword) {
+        for (User user : userList) {
+            // Convert char array to String for comparison
+            String passwordString = new String(enteredPassword);
+
+            if (user.getLibraryCardID().equals(enteredLibraryCardID) && user.getPassword().equals(passwordString)) {
+                return user; // Match found
+            }
+        }
+        return null; // No match found
     }
 
 
@@ -108,15 +121,18 @@ public class SignIn extends JPanel {
                 char[] enteredPassword = passwordField.getPassword();
 
                 ArrayList<User> users = Library.getUsers();
-                if(isEmailInList(users, enteredLibraryCardID, enteredPassword) == true){
+                if(isEmailInList(users, enteredLibraryCardID, enteredPassword)){
+                    //User login = isValidLogin(users, enteredLibraryCardID, enteredPassword);
+                     manager.showHomePanel();
                      libraryCardIDField.setText("");
                      passwordField.setText("");
                      messageLabel.setText("");
-                     manager.showHomePanel();
                      manager.makeProfilePanel(enteredLibraryCardID);
                      manager.makeSearchPanel();
                      manager.makeBorrowPage();
                      manager.makeReturnPage();
+                     manager.makeAddRemovePage();
+                     manager.makePublishPage();
                      currentLibraryCardID = enteredLibraryCardID;
         
                 }else{

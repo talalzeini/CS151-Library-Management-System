@@ -1,6 +1,7 @@
 package src.main;
 import javax.swing.*;
 import src.authentication.forms.*;
+import src.main.library.AddRemovePage;
 import src.main.library.SearchBooks;
 import src.main.library.BorrowPage;
 import src.main.library.ReturnPage;
@@ -83,6 +84,26 @@ public class PanelsManager extends JPanel {
 
     public void showReturnPage(){
         cardLayout.show(cardPanel, "ReturnPage");      
+    }
+
+    public void makeAddRemovePage(){
+        AddRemovePage addRemovePanel = new AddRemovePage(this);
+        cardPanel.add(addRemovePanel, "addRemovePage");
+        addRemovePanel.setBackground(defaultBackgroundColor);
+    }
+
+    public void showAddRemovePage(){
+        cardLayout.show(cardPanel, "addRemovePage");
+    }
+
+    public void makePublishPage(){
+        AddRemovePage publishPanel = new AddRemovePage(this);
+        cardPanel.add(publishPanel, "publishPage");
+        publishPanel.setBackground(defaultBackgroundColor);
+    }
+
+    public void showPublishPage(){
+        cardLayout.show(cardPanel, "publishPage");
     }
     
 }

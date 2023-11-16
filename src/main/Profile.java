@@ -15,11 +15,14 @@ import javax.swing.border.Border;
 
 import src.authentication.exceptions.*;
 import src.main.library.Library;
+import src.main.library.Role;
 import src.main.library.User;
 
 import java.awt.*;
 
 public class Profile extends JPanel {
+
+    private User signedInUser;
 
     public static User showProfileData(String username) {
         ArrayList<User> users = Library.getUsers();
@@ -74,11 +77,11 @@ public class Profile extends JPanel {
         setLayout(new GridLayout(15, 2));
         setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
-        User signedInUser = showProfileData(libraryCardID);
+        signedInUser = showProfileData(libraryCardID);
         String firstName = signedInUser.getFirstName();
         String lastName = signedInUser.getLastName();
         String libraryCardIDString = signedInUser.getLibraryCardID();
-        String roleString = signedInUser.getRole();
+        String roleString = signedInUser.getRole().toString();
         String email = signedInUser.getEmail();
 
         // App Label
@@ -127,6 +130,26 @@ public class Profile extends JPanel {
         JPasswordField newPasswordField = new JPasswordField();
         newPasswordField.setBorder(fieldBorder);
         setVisible(false);
+
+        // Add/Remove button
+        JButton addRemoveButton = new JButton("Add/Remove a book");
+        addRemoveButton.setFont(mainFont);
+        addRemoveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                manager.showAddRemovePage();
+            }
+        });
+
+        // Publish button
+        JButton publishButton = new JButton("Publish a book");
+        publishButton.setFont(mainFont);
+        addRemoveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                manager.showPublishPage();
+            }
+        });
 
         newPasswordField.addKeyListener(new KeyListener() {
             @Override
@@ -222,6 +245,11 @@ public class Profile extends JPanel {
         add(libraryCardIDLabel);
         add(roleLabel);
         add(emailLabel);
+        if (signedInUser.getRole()== Role.LIBRARIAN){
+            add(addRemoveButton);
+        } else if (signedInUser.getRole()== Role.AUTHOR) {
+            add(publishButton);
+        }
         add(changePasswordButton);
         add(errorLabel);
         add(newPasswordLabel);
