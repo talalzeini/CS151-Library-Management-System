@@ -16,6 +16,7 @@ import src.main.PanelsManager;
 
 import java.awt.*;
 
+/**Represents the UI module that implements a basic search feature. */
 public class SearchBooks extends JPanel {
 
     private JLabel bookInfoLabel;
@@ -47,6 +48,7 @@ public class SearchBooks extends JPanel {
     }
     }
 
+    //Panel setup
     public PanelsManager manager;
     public SearchBooks(PanelsManager manager){{
         this.manager = manager;
@@ -61,6 +63,7 @@ public class SearchBooks extends JPanel {
 
         // App Label
         JLabel mainTitle = new JLabel("Search for a book by title or ISBN");
+
         mainTitle.setHorizontalAlignment(JLabel.CENTER);
         mainTitle.setFont(new Font(fontFamily, Font.BOLD, 20));
         mainTitle.setForeground(Color.white);

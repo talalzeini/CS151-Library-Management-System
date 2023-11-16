@@ -1,17 +1,20 @@
 package src.main;
 import javax.swing.*;
 import src.authentication.forms.*;
-import src.main.library.SearchBooks;
-import src.main.library.BorrowPage;
-import src.main.library.ReturnPage;
+import src.main.library.*;
+
 import java.awt.*;
 
+/**Manages all the different UI components, and provides functionality to switch between Panels as needed. */
 public class PanelsManager extends JPanel {
 
     private CardLayout cardLayout;
     private JPanel cardPanel;
     private Color defaultBackgroundColor;
 
+    /**Instantiates the three main panels: Sign Up/Sign In/Home, and adds a background color to each. 
+     * Also establishes the layout system.
+    */
     public PanelsManager() {
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
@@ -33,6 +36,7 @@ public class PanelsManager extends JPanel {
         add(cardPanel, BorderLayout.CENTER);
     }
 
+    //Basic show/make methods for different panels.
     public void showSignInPanel() {
         cardLayout.show(cardPanel, "SignIn");
     }
@@ -83,6 +87,26 @@ public class PanelsManager extends JPanel {
 
     public void showReturnPage(){
         cardLayout.show(cardPanel, "ReturnPage");      
+    }
+
+    public void makeAddRemovePage(){
+        AddRemovePage addRemovePanel = new AddRemovePage(this);
+        cardPanel.add(addRemovePanel, "addRemovePage");
+        addRemovePanel.setBackground(defaultBackgroundColor);
+    }
+
+    public void showAddRemovePage(){
+        cardLayout.show(cardPanel, "addRemovePage");
+    }
+
+    public void makePublishPage(){
+        PublishPage publishPanel = new PublishPage(this);
+        cardPanel.add(publishPanel, "publishPage");
+        publishPanel.setBackground(defaultBackgroundColor);
+    }
+
+    public void showPublishPage(){
+        cardLayout.show(cardPanel, "publishPage");
     }
     
 }

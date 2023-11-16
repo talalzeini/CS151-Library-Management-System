@@ -1,12 +1,14 @@
 package src.main.library;
 import java.util.ArrayList;
+
 /** Desribes a user of the library system who reads and discusses books online. */
 public class User {
     
     /** Name of the user, typically consisting of the First, Last, and libraryCardID. */
+
     private String firstName;
     private String lastName;
-     private String role;
+    private Role role;
     private String libraryCardID;
     /** The set of all books currently borrowed by the user. */
     private ArrayList<Book> borrowedBooks;
@@ -16,7 +18,7 @@ public class User {
      *  use the one selected for library communications. */
     private String email;
 
-      public User(String firstName, String lastName, String role, String libraryCardID, String email, String password) {
+      public User(String firstName, String lastName, Role role, String libraryCardID, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
@@ -43,7 +45,7 @@ public class User {
     }
 
     // Getters and setters for the fields
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 

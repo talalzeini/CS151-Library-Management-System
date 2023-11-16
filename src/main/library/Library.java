@@ -5,41 +5,33 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**Represents the library as a whole, as a collection of Users and Books. */
 public class Library {
     private static ArrayList<User> userList = new ArrayList<User>();
     private static ArrayList<Book> bookInventory = new ArrayList<Book>();
 
+    //Adds three test users for demo purposes.
     public static void addTestUser() {
-        User testUser = new User("test", "test", "test", "test", "test", "test");
-        userList.add(testUser);
+        User testMember = new User("test", "test", Role.MEMBER, "test", "test", "test");
+        User testAuthor = new User("author", "author", Role.AUTHOR, "author", "author", "author");
+        User testLibrarian = new User("librarian", "librarian", Role.LIBRARIAN, "librarian", "librarian", "librarian");
+        userList.add(testMember);
+        userList.add(testAuthor);
+        userList.add(testLibrarian);
     }
 
+    //Adds user to userList
     public static void addUser(User user){
         userList.add(user);
         writeLibraryCardIDToFile(user);
     }
 
-    public static String getRoleFile(String userRole){
-        if(userRole.toLowerCase().equals("member")){
-            return "members";
-        }
-        else if(userRole.toLowerCase().equals("author")){
-            return "authors";
-        }
-        else if(userRole.toLowerCase().equals("librarian")){
-            return "librarians";
-        }
-        return "";
-    }
-
     private static void writeLibraryCardIDToFile(User user) {
         
-        String userRole = user.getRole();
-        System.out.println(userRole);
-         String roleFileString = getRoleFile(userRole);
-          System.out.println(roleFileString);
+        String userRoleString= user.getRole().toString();
+        System.out.println(userRoleString);
     
-        try (FileWriter writer = new FileWriter("src/files/users/" + roleFileString + ".txt", true)) {
+        try (FileWriter writer = new FileWriter("src/files/users/" + userRoleString + ".txt", true)) {
             writer.write(user.getLibraryCardID() + "\n");
         } catch (IOException e) {
             e.printStackTrace();
@@ -66,7 +58,7 @@ public class Library {
         bookInventory.add(b);
     }
 
-    public void removeBook(Book b){
+    public static void removeBook(Book b){
         bookInventory.remove(b);
     }
 
