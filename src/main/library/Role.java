@@ -10,7 +10,7 @@ public enum Role {
             case MEMBER: return("member");
             case LIBRARIAN: return("librarian");
             case AUTHOR: return("author");
-            default: return("regular member");
+            default: return("member");
         }
     }
 
