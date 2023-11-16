@@ -18,16 +18,14 @@ import java.awt.*;
 
 public class SearchBooks extends JPanel {
 
-    public static ArrayList<JLabel> labels = new ArrayList<>();
+    private JLabel bookInfoLabel;
+    private static int page;
 
-    public static JLabel searchBook(String searchedText) {
+    public static ArrayList<String> bookList = new ArrayList<>();
+
+    public static void searchBook(String searchedText) {
     // Trim the input string
     String trimmedISBN = searchedText.trim();
-
-    JLabel bookInfo = new JLabel();
-    bookInfo.setHorizontalAlignment(JLabel.CENTER); 
-    bookInfo.setFont(new Font("Avenir", Font.BOLD, 14));
-    bookInfo.setForeground(Color.white);
 
 
     // Check if the trimmed string is a number
@@ -38,37 +36,15 @@ public class SearchBooks extends JPanel {
         // Check if the book is found
         if (searchedBook != null) {
             String bookString = searchedBook.getTitle() + ", " + searchedBook.getAuthor() + ", " + searchedBook.getISBN();
-            bookInfo.setText(bookString);
-        } else {
-             bookInfo.setText("Book not found for ISBN: " + trimmedISBN);
+            bookList.add(bookString);
         }
     } else {
         ArrayList<Book> searchedBooks = Library.searchByTitle(searchedText);
 
-       if (!searchedBooks.isEmpty()) {
-            // Iterate through the first 5 books
-
-            if(searchedBooks.size() > 5){
-                int count = 0;
-                for (Book searchedBook : searchedBooks) {
-                    if (count < 5) {
-                        String bookString = searchedBook.getTitle() + ", " + searchedBook.getAuthor() + ", " + searchedBook.getISBN();
-                        labels.add(new JLabel(bookString));
-                        count++;
-                    } else {
-                        break; // Stop after iterating through the first 5 books
-                    }
-                }
-            }
-
-            bookInfo.setText("Book not found for ISBN: " + trimmedISBN);
-
-        } else {
-            // No books found for the entered ISBN
-             bookInfo.setText("No books found similar to that title");
+        for (Book b : searchedBooks) {
+            bookList.add(b.getTitle() + ", " + b.getAuthor() + ", " + b.getISBN());
         }
     }
-        return bookInfo;
     }
 
     public PanelsManager manager;
@@ -84,7 +60,7 @@ public class SearchBooks extends JPanel {
         setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
         // App Label
-        JLabel mainTitle = new JLabel("Hi");
+        JLabel mainTitle = new JLabel("Search for a book by title or ISBN");
         mainTitle.setHorizontalAlignment(JLabel.CENTER);
         mainTitle.setFont(new Font(fontFamily, Font.BOLD, 20));
         mainTitle.setForeground(Color.white);
@@ -98,33 +74,65 @@ public class SearchBooks extends JPanel {
         searchButton.setBackground(Color.white);
         searchButton.setForeground(Color.black);
 
+        //NONFUNCTIONAL:
+//        // Next page button
+//        JButton nextPageButton = new JButton("Next Page");
+//        nextPageButton.setBackground(Color.white);
+//        nextPageButton.setForeground(Color.black);
+//
+//        nextPageButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                page++;
+//            }
+//        });
+//
+//        // Previous page button
+//        JButton prevPageButton = new JButton("Previous Page");
+//        prevPageButton.setBackground(Color.white);
+//        prevPageButton.setForeground(Color.black);
+//
+//        prevPageButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                page--;
+//            }
+//        });
+
+        ArrayList<JLabel> labels = new ArrayList<JLabel>();
+        labels.add(new JLabel());
+        labels.add(new JLabel());
+        labels.add(new JLabel());
+        labels.add(new JLabel());
+        labels.add(new JLabel());
 
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String searchedText = searchField.getText();
                 System.out.println("Searching....");
-                JLabel bookInfoLabel = searchBook(searchedText);
+                searchBook(searchedText);
 
                 // Trim the input string
                 String trimmedISBN = searchedText.trim();
 
                 // Check if the trimmed string is a number
                 if (trimmedISBN.matches("\\d+")) {
-                      add(bookInfoLabel);
-                }else{
-                    for (JLabel label : labels){
-                            JLabel bookInfo = new JLabel(label.getText());
-                            bookInfo.setHorizontalAlignment(JLabel.CENTER); 
-                            bookInfo.setFont(new Font("Avenir", Font.BOLD, 14));
-                            bookInfo.setForeground(Color.white);
-                            add(bookInfo);
+                      labels.get(0).setText(bookList.get(0));
+                    for (int i = 1; i < 5; i++){
+                        labels.get(i).setText("");
                     }
-                     labels.clear();
+                } else if (!trimmedISBN.isEmpty()) {
+                    for (int i = page*5; i < page*5+5; i++){
+                        if (page*5+i < labels.size()){
+                            labels.get(page*5+i).setText(bookList.get(page*5+i));
+                        }
+                    }
+                } else {
+                    for (int i = 0; i < 5; i++){
+                        labels.get(i).setText("");
+                    }
                 }
-
-                validate();
-                 repaint();
             }
         });
 
@@ -142,6 +150,11 @@ public class SearchBooks extends JPanel {
         add(searchField);
         add(searchButton);
         add(backButton);
+        for (JLabel j : labels) {
+            j.setFont(new Font(fontFamily, Font.PLAIN, 14));
+            j.setForeground(Color.white);
+            add(j);
+        }
     }
 }
 }

@@ -97,7 +97,7 @@ public class Library {
     public static ArrayList<Book> searchByTitle(String title){
         ArrayList<Book> returnal = new ArrayList<Book>();
         for(Book b : bookInventory){
-            if(b.getTitle().contains(title)){
+            if(b.getTitle().toLowerCase().contains(title.toLowerCase())){
                 returnal.add(b);
             }
         }
