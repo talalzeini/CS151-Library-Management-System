@@ -1,0 +1,10 @@
+Coraline, Neil Gaiman, 9780380807345, false
+The Spy Coast, Tess Gerritsen, 9781662515132, true
+The Edge, David Baldacci, 9781538719916, false
+The Turn of the Key, Ruth Ware, 9781501188787, false
+The Shining, Stephen King, 9780345806789, false
+Misery, Stephen King, 9781501143106, true
+Killing Floor, Lee Child, 9780515153651, false
+No Exit, Taylor Adams, 9780063254473, true
+Into The Water, Paula Hawkins, 9780735211223, true
+Jurassic Park, Michael Crichton, 9780345538987, false

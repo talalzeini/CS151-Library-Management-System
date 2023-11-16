@@ -1,0 +1,10 @@
+The Diary of a Young Girl, Anne Frank, 9780553577129, true
+Becoming, Michelle Obama, 9781524763145, true
+Night, Elie Wiesel, 9780374500016, false
+Born a Crime, Trevor Noah, 9780399588198, true
+The Glass Castle, Jeannette Walls, 9780743247542, false
+The Art of War, Sun Tzu, 9781599869773, false
+Astrophysics for People in a Hurry, Neil Tyson, 9780393609394, false
+Into the Wild, Jon Krakauer, 9780385486804, true
+Man’s Search for Meaning, Viktor Frankl, 9780807014271, false
+Educated, Tara Westover, 9780399590528, false

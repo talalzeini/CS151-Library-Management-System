@@ -10,8 +10,8 @@ import src.authentication.exceptions.PasswordException;
 import src.authentication.exceptions.SpecialCharacterMissing;
 import src.authentication.exceptions.UpperCaseCharacterMissing;
 import src.main.PanelsManager;
-import src.main.User;
-import src.main.UserManager;
+import src.main.library.Library;
+import src.main.library.User;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -23,11 +23,17 @@ import java.util.Random;
 public class SignUp extends JPanel {
     private JTextField firstNameField;
     private JTextField lastNameField;
+    private JTextField roleTextField;
     private JTextField emailField;
     private JPasswordField passwordField;
-    private JLabel usernameLabel;
+    
+    private JLabel libraryCardIDLabel;
     private JButton signupButton;
     public PanelsManager manager;
+
+    private boolean isEmpty(String str) {
+        return str == null || str.trim().isEmpty();
+    }
     
     public SignUp(PanelsManager manager) {
         this.manager = manager;
@@ -39,11 +45,11 @@ public class SignUp extends JPanel {
         Border fieldBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
 
         setSize(600, 600);
-        setLayout(new GridLayout(15, 2));
+        setLayout(new GridLayout(19, 2));
         setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
         // App Label
-        JLabel mainTitle = new JLabel("StudyBuddy - Sign Up");
+        JLabel mainTitle = new JLabel("LMS - Sign Up");
         mainTitle.setHorizontalAlignment(JLabel.CENTER);
         mainTitle.setFont(new Font(fontFamily, Font.BOLD, 20));
         mainTitle.setForeground(Color.white);
@@ -61,6 +67,13 @@ public class SignUp extends JPanel {
         lastNameLabel.setFont(mainFont);
         lastNameField = new JTextField();
         lastNameField.setBorder(fieldBorder);
+
+        // Last Name
+        JLabel roleLabel = new JLabel("Author/Librarian/Member: ");
+        roleLabel.setForeground(Color.white);
+        roleLabel.setFont(mainFont);
+        roleTextField = new JTextField();
+        roleTextField.setBorder(fieldBorder);
 
         // Email
         JLabel emailLabel = new JLabel("Email:");
@@ -97,6 +110,12 @@ public class SignUp extends JPanel {
             }
         });
 
+        // Error Message
+        JLabel errorMessage = new JLabel();
+        errorMessage.setHorizontalAlignment(JLabel.CENTER);
+        errorMessage.setFont(new Font(fontFamily, Font.BOLD, 14));
+        errorMessage.setForeground(Color.red);
+
         // SignUp Button
         signupButton = new JButton("Sign Up");
         signupButton.setFont(mainFont);
@@ -104,27 +123,33 @@ public class SignUp extends JPanel {
         signupButton.setBackground(Color.WHITE);
         signupButton.setOpaque(true);
 
-        // Username Label
-        usernameLabel = new JLabel("");
-        usernameLabel.setHorizontalAlignment(JLabel.CENTER);
-        usernameLabel.setFont(new Font(fontFamily, Font.BOLD, 20));
+        // libraryCardID Label
+        libraryCardIDLabel = new JLabel("");
+        libraryCardIDLabel.setHorizontalAlignment(JLabel.CENTER);
+        libraryCardIDLabel.setFont(new Font(fontFamily, Font.BOLD, 20));
 
                 signupButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                 try {
-                String firstName = firstNameField.getText();
-                String lastName = lastNameField.getText();
-                String email = emailField.getText();
-                String password = passwordField.getText();
-                String username = generateUsername(firstName, lastName, email, password);
-                
-                if(username != null){
-                    checkPasswordRequirements(password);
-                    clearFields();
-                    User newUser = new User(firstName, lastName, username, email, password);
-                    UserManager.addUser(newUser);
-                    // printUserList();
+                try {
+                    String firstName = firstNameField.getText();
+                    String lastName = lastNameField.getText();
+                    String role = roleTextField.getText();
+                    String email = emailField.getText();
+                    String password = passwordField.getText();
+                    String libraryCardID = generatelibraryCardID(firstName, lastName, email, password);
+                if(!isEmpty(firstName) || !isEmpty(lastName) || !isEmpty(email)  || !isEmpty(password)){
+                    if(libraryCardID != null){
+                        errorMessage.setText("");
+                        checkPasswordRequirements(password);
+                        libraryCardIDLabel.setText(libraryCardID);
+                        clearFields();
+                        User newUser = new User(firstName, lastName, role, libraryCardID, email, password);
+                        Library.addUser(newUser);
+                    }
+                }else{
+                    libraryCardIDLabel.setText("");
+                    errorMessage.setText("Invalid Input. Textfields must not be empty.");
                 }
             }catch (PasswordException pe) {
             // Display the appropriate error message on the screen
@@ -147,48 +172,42 @@ public class SignUp extends JPanel {
             }
         });
 
-        JButton backHomeButton = new JButton("Home");
-        backHomeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                manager.showHomePanel();
-            }
-        });
-
         add(mainTitle);
         add(firstNameLabel);
         add(firstNameField);
         add(lastNameLabel);
         add(lastNameField);
+        add(roleLabel);
+        add(roleTextField);
         add(emailLabel);
         add(emailField);
         add(passwordLabel);
         add(passwordField);
         add(new JLabel());
+        add(errorMessage);
+        add(new JLabel());
         add(signupButton);
         add(new JLabel());
         add(switchButton);
         add(new JLabel());
-        add(usernameLabel);
+        add(libraryCardIDLabel);
         
     }
 
-        private String generateUsername(String firstName, String lastName, String email, String password) {
-        if (firstName.length() > 0 && lastName.length() > 0 && email.length() > 0 && password.length() > 0) {
+        private String generatelibraryCardID(String firstName, String lastName, String email, String password) {
+        if (firstName.length() > 0 || lastName.length() > 0 || email.length() > 0 || password.length() > 0) {
             char firstChar = firstName.charAt(0);
             char lastChar = lastName.charAt(0);
             int randomDigits = new Random().nextInt(9000) + 1000; // Generate a 4-digit random number
 
-            String username = String.format("%C%C-%04d", firstChar, lastChar, randomDigits);
-            usernameLabel.setText("Username: " + username);
-            return username;
+            return String.format("%C%C-%04d", firstChar, lastChar, randomDigits);
         }else{
-            System.out.println("Erorr");
+            // Error Signing Up
             return null;
         }
     }
 
-        private void checkPasswordRequirements(String password) throws PasswordException {
+    private void checkPasswordRequirements(String password) throws PasswordException {
     if (password.length() < 8) {
         throw new Minimum8CharactersRequired();
     }

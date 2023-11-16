@@ -3,8 +3,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 import src.main.PanelsManager;
-import src.main.UserManager;
-import src.main.User;
+import src.main.library.Library;
+import src.main.library.User;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,26 +14,31 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class SignIn extends JPanel {
-    private JTextField usernameField;
+    private JTextField libraryCardIDField;
     private JPasswordField passwordField;
     private JButton signInButton;
     private JLabel messageLabel;
     public PanelsManager manager;
+    public String currentLibraryCardID;
 
-    public static boolean isEmailInList(ArrayList<User> userList, String enteredUsername, String enteredPassword) {
+    public static boolean isEmailInList(ArrayList<User> userList, String enteredLibraryCardID, char[] enteredPassword) {
         for (User user : userList) {
-            if (user.getUsername().equals(enteredUsername) && user.getPassword().equals(enteredPassword)) {
+            // Convert char array to String for comparison
+            String passwordString = new String(enteredPassword);
+
+            if (user.getLibraryCardID().equals(enteredLibraryCardID) && user.getPassword().equals(passwordString)) {
                 return true; // Match found
             }
         }
         return false; // No match found
     }
 
+
     public SignIn(PanelsManager manager) {
         this.manager = manager;
 
         setLayout(new BorderLayout());
-        UserManager.addTestUser();
+        Library.addTestUser();
 
         String fontFamily = "Avenir";
         Font mainFont = new Font(fontFamily, Font.PLAIN, 14);
@@ -50,11 +55,11 @@ public class SignIn extends JPanel {
         mainTitle.setForeground(Color.white);
 
         // Email
-        JLabel usernamelabel = new JLabel("Username:");
-        usernamelabel.setFont(mainFont);
-        usernamelabel.setForeground(Color.white);
-        usernameField = new JTextField();
-        usernameField.setBorder(fieldBorder);
+        JLabel libraryCardIDlabel = new JLabel("Library Card ID:");
+        libraryCardIDlabel.setFont(mainFont);
+        libraryCardIDlabel.setForeground(Color.white);
+        libraryCardIDField = new JTextField();
+        libraryCardIDField.setBorder(fieldBorder);
 
         // Password
         JLabel passwordLabel = new JLabel("Password:");
@@ -86,7 +91,7 @@ public class SignIn extends JPanel {
 
         // Message Label
         messageLabel = new JLabel("");
-        messageLabel.setForeground(Color.red);
+        messageLabel.setForeground(new Color(230,48,79));
         messageLabel.setHorizontalAlignment(JLabel.CENTER);
 
         // Sign In Button
@@ -99,19 +104,23 @@ public class SignIn extends JPanel {
                 signInButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String enteredUsername = usernameField.getText();
-                String enteredPassword = passwordField.getText();
+                String enteredLibraryCardID = libraryCardIDField.getText();
+                char[] enteredPassword = passwordField.getPassword();
 
-                ArrayList<User> users = UserManager.getUsers();
-                System.out.println(users);
-                if(isEmailInList(users, enteredUsername, enteredPassword) == true){
-                     usernameField.setText("");
+                ArrayList<User> users = Library.getUsers();
+                if(isEmailInList(users, enteredLibraryCardID, enteredPassword) == true){
+                     libraryCardIDField.setText("");
                      passwordField.setText("");
                      messageLabel.setText("");
                      manager.showHomePanel();
-                     manager.makeProfilePanel(enteredUsername);
+                     manager.makeProfilePanel(enteredLibraryCardID);
+                     manager.makeSearchPanel();
+                     manager.makeBorrowPage();
+                     manager.makeReturnPage();
+                     currentLibraryCardID = enteredLibraryCardID;
+        
                 }else{
-                     messageLabel.setText("Username or password may be incorrect. Username is case sensitive.");
+                     messageLabel.setText("LibraryCardID or password may be incorrect. LibraryCardID is case sensitive.");
                 }
             
             }
@@ -141,8 +150,8 @@ public class SignIn extends JPanel {
         });
 
         add(mainTitle);
-        add(usernamelabel);
-        add(usernameField);
+        add(libraryCardIDlabel);
+        add(libraryCardIDField);
         add(passwordLabel);
         add(passwordField);
         add(messageLabel);

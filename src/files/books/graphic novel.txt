@@ -1,0 +1,10 @@
+The Sandman 1, Neil Gaiman, 9781779515179, false
+Spider-Man: Death of Stacys, Stan Lee, 9780785167273, true
+Watchmen #1, Alan Moore, 9781779501127, true
+Batman: Arkham Asylum, Grant Morrison, 9781779504333, false
+Maus, Art Spiegelman, 9788439720713, true
+V for Vendetta, Alan Moore, 9781779511195, false
+Batman: The Killing Joke, Alan Moore, 9781401294052, true
+Bone: The Complete Edition, Jeff Smith, 9781888963144, false
+Death Note Vol. 1: Boredom, Tsugimi Ohba, 9781421501680, true
+The Complete Persepolis, Marjane Satrapi, 9780593701058, false

@@ -1,0 +1,10 @@
+The Three Musketeers, Alexandre Dumas, 9781853260407, false
+Dracula, Bram Stoker, 9781853260865, false
+The Trial, Franz Kafka, 9780805209990, true
+Adventures of Huckleberry Finn, Mark Twain, 9781953649805, false
+Fahrenheit 451, Ray Bradbury, 9781451673265, false
+Gone With the Wind, Margaret Mitchell, 9781451635621, false
+Moby-Dick, Herman Melville, 9781853260087, true
+Lord of the Flies, William Golding, 9780399501487, false
+The Stranger, Albert Camus, 9798387743498, false
+Catch-22, Joseph Heller, 9781451626650, false

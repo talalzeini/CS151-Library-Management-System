@@ -1,0 +1,10 @@
+Pride and Prejudice, Jane Austen, 9780141439518, true
+Beach Read, Emily Henry, 9781984806734, true
+It Ends With Us, Colleen Hoover, 9781501110368, true
+Twilight, Stephenie Meyer, 9780316327336, false
+A Court of Thorns and Roses, Sarah Maas, 9781635575569, false
+Fifty Shades of Grey, E.L. James, 9780345804044, true
+The Duke and I, Julia Quinn, 9780062353597, false
+It Happened One Summer, Tessa Bailey, 9780063045651, false
+Jane Eyre, Charlotte Bronte, 9781435171664, true
+To All The Boys I’ve Loved Before, Jenny Han, 9781442426719, false

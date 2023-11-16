@@ -1,0 +1,10 @@
+Foundation, Isaac Asimov, 9780553293357, false
+Foundation and Empire, Isaac Asimov, 9780553293371, false
+Second Foundation, Isaac Asimov, 9780553293364, false
+1984, George Orwell, 9780451524935, true
+The Martian, Andy Weir, 9780553418026, true
+Fahrenheit 451, Ray Bradbury, 9781451673265, true
+The Inheritors, William Golding, 9780571362325, true
+Nova Express, William Burroughs, 9788845922510, false
+Dune, Frank Herbert, 9780441013593, true
+Do Androids Dream of Electric Sheep?, Philip Dick, 9781407230023, true

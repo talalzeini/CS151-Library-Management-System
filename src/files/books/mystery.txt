@@ -1,0 +1,10 @@
+The Last Devil to Die, Richard Osman, 9780593299425, true
+The Sting of the Scorpion, Franklin Dixon, 9780448089584, false
+The Maltese Falcon, Dashiell Hammett, 9780679722649, false
+A Man Lay Dead, Ngaio Marsh, 9780007328697, true
+The Three Coffins, John Carr, 9780739490891, true
+Beat Not the Bones, Charlotte Jay, 9781862542877, true
+Casino Royale, Ian Fleming, 9780063298521, true
+The Talented Mr. Ripley, Patricia Highsmith, 9780393332148, false
+Mean Spirit, Linda Hogan, 9781501112454, true
+The Secret History, Donna Tartt, 9781400031702, false
