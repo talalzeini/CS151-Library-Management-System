@@ -16,6 +16,7 @@ import src.main.PanelsManager;
 
 import java.awt.*;
 
+/**Represents the UI module that implements a basic search feature. */
 public class SearchBooks extends JPanel {
 
     public static ArrayList<JLabel> labels = new ArrayList<>();
@@ -71,6 +72,7 @@ public class SearchBooks extends JPanel {
         return bookInfo;
     }
 
+    //Panel setup
     public PanelsManager manager;
     public SearchBooks(PanelsManager manager){{
         this.manager = manager;

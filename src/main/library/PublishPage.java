@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**Represents the UI panel from which Authors can publish books to the library. */
 public class PublishPage extends JPanel {
 
     public PanelsManager manager;
@@ -49,6 +50,8 @@ public class PublishPage extends JPanel {
         bookInfoLabel.setFont(new Font("Avenir", Font.BOLD, 14));
         bookInfoLabel.setForeground(Color.white);
 
+
+        //Button publishes a book to the library
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,6 +59,12 @@ public class PublishPage extends JPanel {
                     String getBook = ISBNSearchField.getText();
                     String[] bookData = getBook.split(",");
                     Genre genre = Genre.getGenre(bookData[3]);
+                    // Making sure ISBN is unique
+                    for(Book b : Library.getInventory()){
+                        if(b.getISBN().equals(bookData[2])){
+                            throw new Exception();
+                        }
+                    }
                     // title author isbn genre
                     if (bookData.length == 4) {
                         Book book = new Book(bookData[0], bookData[1], bookData[2], genre, Status.CHECKED_IN);
@@ -63,13 +72,14 @@ public class PublishPage extends JPanel {
                         addBook(book);
                     }
                 } catch (Exception exc) {
-                    System.out.println("invalid book");
-                    bookInfoLabel.setText("Invalid book.\nBook format is: Title, Author, ISBN, Genre");
+                    System.out.println("invalid book/ISBN");
+                    bookInfoLabel.setText("Invalid book/Repeated ISBN.\nBook format is: Title, Author, ISBN, Genre");
                 }
 
             }
         });
 
+        //Back button to get to previous page
         JButton backButton = new JButton("Back");
         backButton.setFont(mainFont);
         backButton.addActionListener(new ActionListener() {
@@ -89,10 +99,12 @@ public class PublishPage extends JPanel {
         add(bookInfoLabel);
     }
 
+    //Calls library addbook
     public static void addBook(Book b){
         Library.addBook(b);
     }
 
+    //Calls library removeBook
     public static void removeBook(Book b) {
         Library.removeBook(b);
     }

@@ -17,6 +17,7 @@ import java.io.IOException;
 import src.main.PanelsManager;
 import java.awt.*;
 
+/**Represents the page from which Users can return borrowed books. */
 public class ReturnPage extends JPanel {
 
     private static String statusMessage;
@@ -39,7 +40,7 @@ public class ReturnPage extends JPanel {
             StringBuilder updatedContent = new StringBuilder();
             String line;
             boolean found = false;
-
+            //Splits the txt file into the needed parameters
             while ((line = br.readLine()) != null) {
                 String[] bookData = line.split(",");
                 String currentISBN = bookData[2].trim();
@@ -108,7 +109,7 @@ public class ReturnPage extends JPanel {
                 }catch (IOException error) {
              System.out.println(error);
             }
-
+            //If book is not borrowed, it can't be returned.
             }else if(searchedBook.geStatus() == Status.CHECKED_IN){
                 bookString = "Apologies. You can't return this book because you never borrowed it.";
             }
@@ -124,6 +125,7 @@ public class ReturnPage extends JPanel {
 
 
     public PanelsManager manager;
+    /**Initializes page with appropriate */
     public ReturnPage(PanelsManager manager){{
         this.manager = manager;
 
@@ -163,6 +165,8 @@ public class ReturnPage extends JPanel {
         bookInfoLabel.setFont(new Font("Avenir", Font.BOLD, 14));
         bookInfoLabel.setForeground(Color.white);
 
+
+        //Returns a book assuming that it is valid. 
         returnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
