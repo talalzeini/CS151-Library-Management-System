@@ -169,9 +169,9 @@ public class SignUp extends JPanel {
 
                         Role userRole = Role.MEMBER;
                         if (role.equalsIgnoreCase("librarian")){
-                            userRole = Role.AUTHOR;
-                        } else if(role.equalsIgnoreCase("author")){
                             userRole = Role.LIBRARIAN;
+                        } else if(role.equalsIgnoreCase("author")){
+                            userRole = Role.AUTHOR;
                         }
                         User newUser = new User(firstName, lastName, userRole, libraryCardID, email, password);
                         Library.addUser(newUser);
