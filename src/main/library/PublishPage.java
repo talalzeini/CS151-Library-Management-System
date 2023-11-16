@@ -30,54 +30,43 @@ public class PublishPage extends JPanel {
         mainTitle.setForeground(Color.white);
 
         // Input Label
-        JLabel returnLabel = new JLabel("Enter your book's ISBN here: ");
-        returnLabel.setFont(new Font(fontFamily, Font.BOLD, 14));
-        returnLabel.setForeground(Color.white);
+        JLabel addRemoveLabel = new JLabel("Enter the title, author name, ISBN, and genre, separated by commas.");
+        addRemoveLabel.setFont(new Font(fontFamily, Font.BOLD, 14));
+        addRemoveLabel.setForeground(Color.white);
 
         // Search Field
         JTextField ISBNSearchField = new JTextField();
         ISBNSearchField.setBorder(fieldBorder);
 
-        // Publish
-        JButton addButton = new JButton("Add a book");
+        // Add Button
+        JButton addButton = new JButton("Publish a book");
         addButton.setBackground(Color.white);
         addButton.setForeground(Color.black);
 
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
-        // Remove Button
-        JButton removeButton = new JButton("Remove a book");
-        removeButton.setBackground(Color.white);
-        removeButton.setForeground(Color.black);
-
-        removeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
         //Status message label
         JLabel bookInfoLabel = new JLabel();
-        //JLabel bookInfoLabel = new JLabel(statusMessage);
         bookInfoLabel.setHorizontalAlignment(JLabel.CENTER);
         bookInfoLabel.setFont(new Font("Avenir", Font.BOLD, 14));
         bookInfoLabel.setForeground(Color.white);
 
-        removeButton.addActionListener(new ActionListener() {
+        addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String searchedText = ISBNSearchField.getText();
-                System.out.println("Returning....");
-                //statusMessage = returnBookNow(searchedText);
-                //bookInfoLabel.setText(statusMessage);
-                validate();
-                repaint();
+                try {
+                    String getBook = ISBNSearchField.getText();
+                    String[] bookData = getBook.split(",");
+                    Genre genre = Genre.getGenre(bookData[3]);
+                    // title author isbn genre
+                    if (bookData.length == 4) {
+                        Book book = new Book(bookData[0], bookData[1], bookData[2], genre, Status.CHECKED_IN);
+                        bookInfoLabel.setText("Book published.");
+                        addBook(book);
+                    }
+                } catch (Exception exc) {
+                    System.out.println("invalid book");
+                    bookInfoLabel.setText("Invalid book.\nBook format is: Title, Author, ISBN, Genre");
+                }
+
             }
         });
 
@@ -92,10 +81,19 @@ public class PublishPage extends JPanel {
         });
 
         add(mainTitle);
+        add(addRemoveLabel);
         add(ISBNSearchField);
         add(addButton);
-        add(removeButton);
+        add(new JLabel());
         add(backButton);
         add(bookInfoLabel);
+    }
+
+    public static void addBook(Book b){
+        Library.addBook(b);
+    }
+
+    public static void removeBook(Book b) {
+        Library.removeBook(b);
     }
 }

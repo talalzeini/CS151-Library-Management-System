@@ -30,9 +30,9 @@ public class AddRemovePage extends JPanel {
         mainTitle.setForeground(Color.white);
 
         // Input Label
-        JLabel returnLabel = new JLabel("Enter your book's ISBN here: ");
-        returnLabel.setFont(new Font(fontFamily, Font.BOLD, 14));
-        returnLabel.setForeground(Color.white);
+        JLabel addRemoveLabel = new JLabel("Enter book information or remove a book via ISBN.");
+        addRemoveLabel.setFont(new Font(fontFamily, Font.BOLD, 14));
+        addRemoveLabel.setForeground(Color.white);
 
         // Search Field
         JTextField ISBNSearchField = new JTextField();
@@ -55,29 +55,10 @@ public class AddRemovePage extends JPanel {
                 try {
                     String getBook = ISBNSearchField.getText();
                     String[] bookData = getBook.split(",");
-                    Genre genre = null;
-                    // I LOVE CHEESE
-                    if (bookData[3].equalsIgnoreCase("fantasy")){
-                        genre = Genre.FANTASY;
-                    } else if (bookData[3].equalsIgnoreCase("thriller")){
-                        genre = Genre.THRILLER;
-                    } else if (bookData[3].equalsIgnoreCase("action and adventure")){
-                        genre = Genre.ACTION_AND_ADVENTURE;
-                    } else if (bookData[3].equalsIgnoreCase("mystery")){
-                        genre = Genre.MYSTERY;
-                    } else if (bookData[3].equalsIgnoreCase("science fiction")){
-                        genre = Genre.SCIENCE_FICTION;
-                    } else if (bookData[3].equalsIgnoreCase("nonfiction")){
-                        genre = Genre.NONFICTION;
-                    } else if (bookData[3].equalsIgnoreCase("graphic novel")){
-                        genre = Genre.GRAPHIC_NOVEL;
-                    } else if (bookData[3].equalsIgnoreCase("romance")){
-                        genre = Genre.ROMANCE;
-                    }
+                    Genre genre = Genre.getGenre(bookData[3]);
                     // title author isbn genre
                     if (bookData.length == 4) {
                         Book book = new Book(bookData[0], bookData[1], bookData[2], genre, Status.CHECKED_IN);
-                        System.out.println(book.getGenre());
                         bookInfoLabel.setText("Book added.");
                         addBook(book);
                     }
@@ -118,6 +99,7 @@ public class AddRemovePage extends JPanel {
         });
 
         add(mainTitle);
+        add(addRemoveLabel);
         add(ISBNSearchField);
         add(addButton);
         add(removeButton);
@@ -127,7 +109,6 @@ public class AddRemovePage extends JPanel {
 
     public static void addBook(Book b){
         Library.addBook(b);
-        System.out.println(Library.searchByTitle(b.getTitle()).size());
     }
 
     public static void removeBook(Book b) {

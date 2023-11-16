@@ -144,7 +144,7 @@ public class Profile extends JPanel {
         // Publish button
         JButton publishButton = new JButton("Publish a book");
         publishButton.setFont(mainFont);
-        addRemoveButton.addActionListener(new ActionListener() {
+        publishButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 manager.showPublishPage();

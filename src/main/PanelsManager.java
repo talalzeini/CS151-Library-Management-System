@@ -1,10 +1,8 @@
 package src.main;
 import javax.swing.*;
 import src.authentication.forms.*;
-import src.main.library.AddRemovePage;
-import src.main.library.SearchBooks;
-import src.main.library.BorrowPage;
-import src.main.library.ReturnPage;
+import src.main.library.*;
+
 import java.awt.*;
 
 public class PanelsManager extends JPanel {
@@ -97,7 +95,7 @@ public class PanelsManager extends JPanel {
     }
 
     public void makePublishPage(){
-        AddRemovePage publishPanel = new AddRemovePage(this);
+        PublishPage publishPanel = new PublishPage(this);
         cardPanel.add(publishPanel, "publishPage");
         publishPanel.setBackground(defaultBackgroundColor);
     }
