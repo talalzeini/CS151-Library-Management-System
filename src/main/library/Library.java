@@ -5,10 +5,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**Represents the library as a whole, as a collection of Users and Books. */
 public class Library {
     private static ArrayList<User> userList = new ArrayList<User>();
     private static ArrayList<Book> bookInventory = new ArrayList<Book>();
 
+    //Adds three test users for demo purposes.
     public static void addTestUser() {
         User testMember = new User("test", "test", Role.MEMBER, "test", "test", "test");
         User testAuthor = new User("author", "author", Role.AUTHOR, "author", "author", "author");
@@ -18,6 +20,7 @@ public class Library {
         userList.add(testLibrarian);
     }
 
+    //Adds user to userList
     public static void addUser(User user){
         userList.add(user);
         writeLibraryCardIDToFile(user);

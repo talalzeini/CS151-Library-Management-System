@@ -165,6 +165,7 @@ public class BorrowPage extends JPanel {
         });
 
 
+        //Back button to return to last page.
         JButton backButton = new JButton("Back");
         backButton.setFont(mainFont);
                 backButton.addActionListener(new ActionListener() {

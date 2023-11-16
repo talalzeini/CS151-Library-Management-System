@@ -8,11 +8,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**UI component that handles adding/removing books */
 public class AddRemovePage extends JPanel {
 
     public PanelsManager manager;
     public AddRemovePage(PanelsManager manager) {
-
+        //Basic setup for panel
         this.manager = manager;
 
         String fontFamily = "Avenir";
@@ -49,6 +50,8 @@ public class AddRemovePage extends JPanel {
         bookInfoLabel.setFont(new Font("Avenir", Font.BOLD, 14));
         bookInfoLabel.setForeground(Color.white);
 
+
+        //Adding a book
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -81,6 +84,7 @@ public class AddRemovePage extends JPanel {
         removeButton.setBackground(Color.white);
         removeButton.setForeground(Color.black);
 
+        //Code for removing a book, assuming ISBN is valid, removes from Library using removeBook()
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -95,6 +99,7 @@ public class AddRemovePage extends JPanel {
             }
         });
 
+        //Back button to get back to profile page
         JButton backButton = new JButton("Back");
         backButton.setFont(mainFont);
         backButton.addActionListener(new ActionListener() {

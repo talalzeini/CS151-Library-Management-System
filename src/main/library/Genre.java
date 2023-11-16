@@ -1,5 +1,5 @@
 package src.main.library;
-/**The genre of a book. A book must have at least one genre. */
+/**The genre of a book. A book must have one genre. */
 public enum Genre {
     FANTASY,
     NARRATIVE,

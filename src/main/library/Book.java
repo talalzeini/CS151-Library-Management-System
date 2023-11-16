@@ -1,7 +1,9 @@
 package src.main.library;
 
+/**Represents a Book object that users can add/remove, and borrow/return. */
 public class Book {
 
+    //Identifying fields for a Book
     private String ISBN;
     private String title;
     private String author;
@@ -16,6 +18,7 @@ public class Book {
         this.status = status;
     }
 
+    //Basic getters and setters
     public String getISBN(){
         return ISBN;
     }
