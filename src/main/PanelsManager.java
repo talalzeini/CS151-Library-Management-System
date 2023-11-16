@@ -5,12 +5,16 @@ import src.main.library.*;
 
 import java.awt.*;
 
+/**Manages all the different UI components, and provides functionality to switch between Panels as needed. */
 public class PanelsManager extends JPanel {
 
     private CardLayout cardLayout;
     private JPanel cardPanel;
     private Color defaultBackgroundColor;
 
+    /**Instantiates the three main panels: Sign Up/Sign In/Home, and adds a background color to each. 
+     * Also establishes the layout system.
+    */
     public PanelsManager() {
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
@@ -32,6 +36,7 @@ public class PanelsManager extends JPanel {
         add(cardPanel, BorderLayout.CENTER);
     }
 
+    //Basic show/make methods for different panels.
     public void showSignInPanel() {
         cardLayout.show(cardPanel, "SignIn");
     }

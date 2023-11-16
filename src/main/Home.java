@@ -90,7 +90,7 @@ public class Home extends JPanel {
         returnButton.setHorizontalAlignment(JButton.CENTER);
         returnButton.setBackground(Color.WHITE);
 
-        // Back Button
+        // Back Button, works by adding previous components to a stack and rebuilding them in order.
         JButton backButton = new JButton("Back");
         backButton.setFont(mainFont);
         backButton.addActionListener(new ActionListener() {
