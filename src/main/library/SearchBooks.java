@@ -44,7 +44,7 @@ public class SearchBooks extends JPanel {
         ArrayList<Book> searchedBooks = Library.searchByTitle(searchedText);
 
         // return array of 10 nums ->  5-(7 mod 5) blanks
-        int gap = (5-(searchedBooks.size()%5))%5;
+        int gap = 5-(searchedBooks.size()%5);
         System.out.println(searchedBooks.size() + " books and " + gap + " blanks.");
         for (Book b : searchedBooks) {
             bookList.add(b.getTitle() + ", " + b.getAuthor() + ", " + b.getISBN());
