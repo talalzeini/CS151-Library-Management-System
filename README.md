@@ -164,3 +164,46 @@ Team Members: Talal El Zeini, Parth Chouksay, Tyler Biesemeyer
 - In the files/books folder, you’ll see where the Genre Pages are retrieving data from
 
 - You can display the books of a certain genre by clicking on the buttons in the HomePage
+
+# Functionality
+
+- Has a Sign In Page that splits users into three categories: User, Author, and Librarian. These categories have their own .txt files which store info on registered users. The program contains a suite of password handling exceptions to make sure Users create an account with valid parameters.
+- The program adds books to .txt files for each genre. New .txt files are created to list books of genres not already declared.
+- Each book consists of a Title, Author, ISBN, and state(Checked In vs Checked Out). This information is stored in the aforementioned .txt files.
+- Once signed in, the program displays a home page. This home page contains buttons to browse books, manage profiles, borrow/remove books, and search for books.
+- Users can browse books from each genre.
+- Users can borrow and return books by ISBN. The program keeps track of borrowed/returned books and changes each book’s status in the .txt file accordingly. The program implements exception handling to make sure that added/removed books are valid.
+- Users can search for books by keywords regarding the book’s title to find a book’s ISBN to borrow.
+- Users can change their passwords and log out.
+- Authors can publish new books into a library, as well as access all the features of a standard User.
+- Librarians can add/remove books from the library,a s well as access all features of a standard User.
+- The User Interface of the program is created using Java Swing, and implements methods to switch from different panels using buttons that call methods to reveal panels. A PanelsManager class contains the functionality to do this.
+- The .txt files of books can be edited before the program runs to fill the library the moment a user runs the program. In addition, there are methods to add users for testing purposes without having to manually create accounts.
+
+# Operations 
+
+## User:
+
+- Create an account, and Sign In/Sign Out
+- Borrow/Return books
+- Search for books
+- Browse books from different Genres
+- Change Password
+  
+## Author:
+
+- All functionality of User and…
+- Can publish books
+  
+## Librarian:
+
+- All functionality of User and…
+- Can add/remove books
+
+# Diagrams
+
+- [For Diagrams, click here](diagrams/README.md)
+
+# Screenshots of Product:
+
+- [For Screenshots of product, click here](screenshots/README.md)
