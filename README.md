@@ -9,18 +9,68 @@ The aim of this project is to create a Library Management System using Java that
 Team Name: Toshi Fan Club
 Team Members: Talal El Zeini, Parth Chouksay, Tyler Biesemeyer
 
+## Run Project
+
+- By running Main.java
+- Opening App.jar file
+    - If any issues are encountered attempting to run "java --enable-preview -jar App.jar" in the terminal would potentially help
+
+## Contributions
+
+## Project proposal contributions:
+
+- Everyone contributed to the proposal/README.md file. Ideas were discussed over Discord before any commits.
+- Everyone also contributed to this README.md file, and verified the accuracy of their contributions.
+- There were no specific roles, everyone contributed to a lot of the features and fixed any bugs needed. The following is just a general idea of what every person focuses on.
+
+## Talal’s contributions
+
+- UI Design & Frontend
+- Panels Management & Switching between them
+- Borrow & Return Functionality (Updating file)
+- Buttons to switch between pages (and back buttons)
+- Genre screens showing all books
+- Added some comments
+- Sign Up & Sign In Feature and password requirement handling
+- Started the search functionality and made it somewhat work which Tyler later improved 
+- Filled readme with all features
+- Participated project presentation
+- Worked on proposal
+- Created jar file
+
+## Tyler's contributions
+
+- Making search feature work and more efficient
+- Removed any issues with the search
+- Fixed bugs in search and publish functions
+- Created add and remove book feature
+- Adding comments
+- Participated in project presentation
+- Worked on proposal
+
+## Parth’s contributions
+- Email requirements and handling with sign-up and sign-in
+- User role requirements and handling
+- Created/Designed all of the diagrams, and created the corresponding directory
+- Finding Books 
+- Worked on a lot of backend functions and classes, declared backend files
+- Fixed bugs related to Sign In/Log In, Exceptions, and Formatting
+- Adding comments and edited code for readability
+- Worked on proposal
+- Participated in project presentation
+
 ## Pages & Features
 
 ### Sign Up Page
 
 - Account Info
     - First Name and Last Name
-    - Email (with Requirements not done yet)
-    - Role (with Requirements not done yet)
+    - Email (with Requirements)
+    - Role (with Requirements)
         - Acceptable inputs are:
             - Author, Librarian, Member
             - author, librarian, member
-    - Password with Requirements
+    - Password (with Requirements)
 
 - Successful Sign Up
     - Library Card ID Generated
@@ -50,8 +100,8 @@ Team Members: Talal El Zeini, Parth Chouksay, Tyler Biesemeyer
 
 - Displays First Name and Last Name
 - Displays Email (requirements needed)
-- Displays Role (not done yet)
-- Option to Change Password (Tyler worked on requirements)
+- Displays Role
+- Option to Change Password
 - Option to Log Out
 - Option to go back to the HomePage
 
