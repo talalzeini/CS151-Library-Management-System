@@ -12,6 +12,11 @@ import java.awt.event.ActionListener;
 public class AddRemovePage extends JPanel {
 
     public PanelsManager manager;
+
+    /**
+     * Constructor to create a page which has the add/remove function to the library.
+     * @param manager The PanelsManager object controlling the UI components of the page.
+     */
     public AddRemovePage(PanelsManager manager) {
         //Basic setup for panel
         this.manager = manager;
@@ -119,10 +124,18 @@ public class AddRemovePage extends JPanel {
         add(bookInfoLabel);
     }
 
+    /**
+     * Method to add a book to the library.
+     * @param b the book to be added.
+     */
     public static void addBook(Book b){
         Library.addBook(b);
     }
 
+    /**
+     * Method to remove a book from the library.
+     * @param b the book to be removed.
+     */
     public static void removeBook(Book b) {
         Library.removeBook(b);
     }

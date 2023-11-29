@@ -199,6 +199,7 @@ public class Profile extends JPanel {
                             errorLabel.setForeground(successColor);
                             errorLabel.setText("Password changed successfully.");
                         } catch (PasswordException ex) {
+                            //Upon catching a password exception, send a message to user.
                             errorLabel.setForeground(failColor);
                             errorLabel.setText("Invalid password. " + ex.getMessage());
                         }
@@ -232,6 +233,7 @@ public class Profile extends JPanel {
         LogOutButton.setBackground(Color.WHITE);
         LogOutButton.setOpaque(true);
 
+        //Shows the Sign In Panel after logging out
         LogOutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -239,6 +241,7 @@ public class Profile extends JPanel {
             }
         });
 
+        //Add previously declared components onto panel
         add(mainTitle);
         add(firstNameLabel);
         add(lastNameLabel);

@@ -10,7 +10,9 @@ public class Library {
     private static ArrayList<User> userList = new ArrayList<User>();
     private static ArrayList<Book> bookInventory = new ArrayList<Book>();
 
-    //Adds three test users for demo purposes.
+    /**
+     * Method to add three example users, for test and demonstration purposes.
+     */
     public static void addTestUser() {
         User testMember = new User("test", "test", Role.MEMBER, "test", "test", "test");
         User testAuthor = new User("author", "author", Role.AUTHOR, "author", "author", "author");
@@ -20,12 +22,19 @@ public class Library {
         userList.add(testLibrarian);
     }
 
-    //Adds user to userList
+    /**
+     * Method that adds a user to the list of users.
+     * @param user The user to be added.
+     */
     public static void addUser(User user){
         userList.add(user);
         writeLibraryCardIDToFile(user);
     }
 
+    /**
+     * Method to store a user's unique library card ID.
+     * @param user the user whose ID will be stored.
+     */
     private static void writeLibraryCardIDToFile(User user) {
         
         String userRoleString= user.getRole().toString();
@@ -62,6 +71,14 @@ public class Library {
         bookInventory.remove(b);
     }
 
+    /**
+     * Method that creates a list of all books available in the library.
+     * The method takes input from a formatted file containing the information of all books to be added.
+     * @param filename
+     * @param genre
+     * @param status
+     * @throws IOException
+     */
     public static void createList(String filename, Genre genre, Status status) throws IOException {
         try (FileReader fr = new FileReader(filename);
             BufferedReader br = new BufferedReader(fr)) {
@@ -84,8 +101,12 @@ public class Library {
             }
         }
     }
-    
-    /* Returns a list of books containing the given name in the title */
+
+    /**
+     * Method that searches for a book by its title.
+     * @param title a string key that will be searched for.
+     * @return an ArrayList of Books with titles containing the search key.
+     */
     public static ArrayList<Book> searchByTitle(String title){
         ArrayList<Book> returnal = new ArrayList<Book>();
         for(Book b : bookInventory){
@@ -96,7 +117,11 @@ public class Library {
         return returnal;
     }
 
-    /* Returns a book with ISBN if it exists, null otherwise. */
+    /**
+     * Method that searches for a book by exact ISBN
+     * @param ISBN the ISBN of the book to be searched for.
+     * @return The book being searched for if it exists, otherwise null.
+     */
     public static Book searchByISBN(String ISBN){
         for(Book book : bookInventory){
             if (book.getISBN().trim().equals(ISBN.trim())) {

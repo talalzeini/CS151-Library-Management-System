@@ -7,6 +7,7 @@ public enum Topic {
     PHILOSOPHY,
     STEM;
 
+    //toString method to convert enum into a string
     public String toString(){
         switch(this){
             case POLITICS: return("Politics");

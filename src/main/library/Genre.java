@@ -11,6 +11,11 @@ public enum Genre {
     GRAPHIC_NOVEL,
     ROMANCE;
 
+    /**
+     * Method that returns a searched genre if it exists.
+     * @param str The genre to be searched for.
+     * @return The corresponding Genre, if it exists.
+     */
     public static Genre getGenre(String str){
         if (str.contains("fantasy")){
             return Genre.FANTASY;
