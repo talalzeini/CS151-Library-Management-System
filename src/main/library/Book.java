@@ -10,6 +10,14 @@ public class Book {
     private Status status;
     private Genre genre;
 
+    /**
+     * Constructor for the Book class. Creates a Book object with a title, author, ISBN, genre, and checked-in status.
+     * @param title The full title of the book.
+     * @param author The full name of the author of the book.
+     * @param ISBN The ISBN of the book.
+     * @param genre The genre of the book, from an enumeration of pre-defined genres.
+     * @param status Whether the book is checked in or borrowed.
+     */
     public Book(String title, String author, String ISBN, Genre genre, Status status) {
         this.title = title;
         this.author = author;

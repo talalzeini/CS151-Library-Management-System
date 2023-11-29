@@ -22,6 +22,13 @@ public class ReturnPage extends JPanel {
 
     private static String statusMessage;
 
+    /**
+     * Method that changes the status of a book when returned.
+     * @param genre The genre of the book.
+     * @param isbn The ISBN of the book.
+     * @param newStatus The new status of the book. A book can be checked in or checked out.
+     * @throws IOException Exception handling for if a book is not found from the database of books.
+     */
     public static void updateReturnedBookStatus(Genre genre, String isbn, Status newStatus) throws IOException {
         String genreString = genre.toString();
         String filename = "src/files/books/" + genreString.toLowerCase() + ".txt";
@@ -73,8 +80,11 @@ public class ReturnPage extends JPanel {
     }
 
 
-
-
+    /**
+     * Method that returns a book specified by the search criteria.
+     * @param searchedText The exact ISBN of the book to be returned.
+     * @return a status message displaying whether the book was successfully returned or not.
+     */
     public static String returnBookNow(String searchedText) {
 
     // Trim the input string

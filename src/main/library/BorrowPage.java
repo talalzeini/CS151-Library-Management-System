@@ -21,6 +21,13 @@ public class BorrowPage extends JPanel {
 
         private static String statusMessage;
 
+    /**
+     * Static method that updates the checked-in-out status of a borrowed book.
+     * @param genre The genre of the book.
+     * @param isbn The ISBN of the book.
+     * @param newStatus The new status of the book. A book can be checked in or checked out.
+     * @throws IOException Exception handling for if a book is not found from the database of books.
+     */
         public static void updateBorrowedBookStatus(Genre genre, String isbn, Status newStatus) throws IOException {
         String genreString = genre.toString();
         String filename = "src/files/books/" + genreString.toLowerCase() + ".txt";
@@ -72,8 +79,12 @@ public class BorrowPage extends JPanel {
     }
 
 
-
-
+    /**
+     * Method that borrows a book with a given ISBN.
+     * The method updates the status of a book if it is in the library (not borrowed).
+     * @param searchedText The ISBN of the book to borrow.
+     * @return a status message displaying whether the book was successfully borrowed or not.
+     */
     public static String borrowBookNow(String searchedText) {
 
     // Trim the input string
@@ -113,7 +124,13 @@ public class BorrowPage extends JPanel {
         return bookString;
     }
 
+
     public PanelsManager manager;
+
+    /**
+     * Constructor for the book borrowing page.
+     * @param manager The PanelsManager object controlling the UI components of the page.
+     */
     public BorrowPage(PanelsManager manager){{
         this.manager = manager;
 

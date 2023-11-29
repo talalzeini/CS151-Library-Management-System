@@ -12,6 +12,11 @@ import java.awt.event.ActionListener;
 public class PublishPage extends JPanel {
 
     public PanelsManager manager;
+
+    /**
+     * Constructor to create a page which has the publish to library function.
+     * @param manager The PanelsManager object controlling the UI components of the page.
+     */
     public PublishPage(PanelsManager manager) {
 
         this.manager = manager;
@@ -73,7 +78,7 @@ public class PublishPage extends JPanel {
                     }
                 } catch (Exception exc) {
                     System.out.println("invalid book/ISBN");
-                    bookInfoLabel.setText("Invalid book/Repeated ISBN.\nBook format is: Title, Author, ISBN, Genre");
+                    bookInfoLabel.setText("Invalid book/Repeated ISBN. \nFormat is: Title, Author, ISBN, Genre");
                 }
 
             }
@@ -99,13 +104,11 @@ public class PublishPage extends JPanel {
         add(bookInfoLabel);
     }
 
-    //Calls library addbook
+    /**
+     * Calls the Library method for adding a book to the library.
+     * @param b the book to be added.
+     */
     public static void addBook(Book b){
         Library.addBook(b);
-    }
-
-    //Calls library removeBook
-    public static void removeBook(Book b) {
-        Library.removeBook(b);
     }
 }
