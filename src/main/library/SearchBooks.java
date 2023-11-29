@@ -28,6 +28,7 @@ public class SearchBooks extends JPanel {
     // Trim the input string
     String trimmedISBN = searchedText.trim();
 
+    bookList.clear();
 
     // Check if the trimmed string is a number
     if (trimmedISBN.matches("\\d+")) {
@@ -39,18 +40,25 @@ public class SearchBooks extends JPanel {
             String bookString = searchedBook.getTitle() + ", " + searchedBook.getAuthor() + ", " + searchedBook.getISBN();
             bookList.add(bookString);
         }
-    } else {
+    } else if (!searchedText.isBlank()){
         ArrayList<Book> searchedBooks = Library.searchByTitle(searchedText);
 
+        // return array of 10 nums ->  5-(7 mod 5) blanks
+        int gap = 5-(searchedBooks.size()%5);
+        System.out.println(searchedBooks.size() + " books and " + gap + " blanks.");
         for (Book b : searchedBooks) {
             bookList.add(b.getTitle() + ", " + b.getAuthor() + ", " + b.getISBN());
+        }
+        for (int i = 0; i < gap; i++){
+            bookList.add("");
         }
     }
     }
 
     //Panel setup
     public PanelsManager manager;
-    public SearchBooks(PanelsManager manager){{
+    public SearchBooks(PanelsManager manager){
+        {
         this.manager = manager;
 
         String fontFamily = "Avenir";
@@ -77,30 +85,6 @@ public class SearchBooks extends JPanel {
         searchButton.setBackground(Color.white);
         searchButton.setForeground(Color.black);
 
-        //NONFUNCTIONAL:
-//        // Next page button
-//        JButton nextPageButton = new JButton("Next Page");
-//        nextPageButton.setBackground(Color.white);
-//        nextPageButton.setForeground(Color.black);
-//
-//        nextPageButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                page++;
-//            }
-//        });
-//
-//        // Previous page button
-//        JButton prevPageButton = new JButton("Previous Page");
-//        prevPageButton.setBackground(Color.white);
-//        prevPageButton.setForeground(Color.black);
-//
-//        prevPageButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                page--;
-//            }
-//        });
 
         ArrayList<JLabel> labels = new ArrayList<JLabel>();
         labels.add(new JLabel());
@@ -109,6 +93,7 @@ public class SearchBooks extends JPanel {
         labels.add(new JLabel());
         labels.add(new JLabel());
 
+        // display all of bookList
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -119,25 +104,64 @@ public class SearchBooks extends JPanel {
                 // Trim the input string
                 String trimmedISBN = searchedText.trim();
 
+                // Reset dual purpose error label
+                labels.get(0).setForeground(Color.white);
+
                 // Check if the trimmed string is a number
                 if (trimmedISBN.matches("\\d+")) {
                       labels.get(0).setText(bookList.get(0));
                     for (int i = 1; i < 5; i++){
                         labels.get(i).setText("");
                     }
-                } else if (!trimmedISBN.isEmpty()) {
-                    for (int i = page*5; i < page*5+5; i++){
-                        if (page*5+i < labels.size()){
-                            labels.get(page*5+i).setText(bookList.get(page*5+i));
-                        }
-                    }
                 } else {
                     for (int i = 0; i < 5; i++){
-                        labels.get(i).setText("");
+                        if (!trimmedISBN.isEmpty() && !bookList.get(0).isEmpty()) {
+                            labels.get(i).setText(bookList.get(i));
+                        } else {
+                            labels.get(i).setText("");
+                            labels.get(0).setForeground(new Color(230,48,79));
+                            labels.get(0).setText("No books found containing specified search criteria.");
+
+                        }
                     }
                 }
             }
         });
+
+            // Next page button
+            JButton nextPageButton = new JButton("Next Page");
+            nextPageButton.setBackground(Color.white);
+            nextPageButton.setForeground(Color.black);
+
+            nextPageButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    //size = 5
+                    if (page * 5 + 5 < bookList.size()){
+                        for (int i = 0; i< 5;i++) {
+                            labels.get(i).setText(bookList.get((page*5+5)+i));
+                        }
+                        page++;
+                    }
+                }
+            });
+
+            // Previous page button
+            JButton prevPageButton = new JButton("Previous Page");
+            prevPageButton.setBackground(Color.white);
+            prevPageButton.setForeground(Color.black);
+
+            prevPageButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (page > 0){
+                        page--;
+                        for (int i = 0; i< 5;i++) {
+                            labels.get(i).setText(bookList.get((page*5)+i));
+                        }
+                    }
+                }
+            });
 
         // Back Button
         JButton backButton = new JButton("Back");
@@ -158,6 +182,8 @@ public class SearchBooks extends JPanel {
             j.setForeground(Color.white);
             add(j);
         }
+        add(nextPageButton);
+        add(prevPageButton);
     }
 }
 }
