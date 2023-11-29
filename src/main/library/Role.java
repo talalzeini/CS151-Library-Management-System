@@ -5,12 +5,13 @@ public enum Role {
     LIBRARIAN,
     AUTHOR;
 
+    //toString method to convert enum into a string
     public String toString(){
         switch(this){
             case MEMBER: return("member");
             case LIBRARIAN: return("librarian");
             case AUTHOR: return("author");
-            default: return("regular member");
+            default: return("member");
         }
     }
 

@@ -5,6 +5,7 @@ public enum Status {
     CHECKED_IN,
     CHECKED_OUT;
 
+    //toString method to convert enum into a string
     public Boolean toBoolean(){
         switch(this){
             case CHECKED_IN: return(true); // book is available

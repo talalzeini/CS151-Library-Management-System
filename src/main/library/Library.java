@@ -40,7 +40,7 @@ public class Library {
         String userRoleString= user.getRole().toString();
         System.out.println(userRoleString);
     
-        try (FileWriter writer = new FileWriter("src/files/users/" + userRoleString + ".txt", true)) {
+        try (FileWriter writer = new FileWriter("src/files/users/" + userRoleString + "s.txt", true)) {
             writer.write(user.getLibraryCardID() + "\n");
         } catch (IOException e) {
             e.printStackTrace();

@@ -114,6 +114,7 @@ public class SearchBooks extends JPanel {
                         labels.get(i).setText("");
                     }
                 } else {
+                    //Send the user a message stating that no books came up
                     for (int i = 0; i < 5; i++){
                         if (!trimmedISBN.isEmpty() && !bookList.get(0).isEmpty()) {
                             labels.get(i).setText(bookList.get(i));
