@@ -34,6 +34,7 @@ public class Home extends JPanel {
         repaint();
     }
 
+    //Method to populate the library with books from txt files, so that users don't have to manually add books one at a time.
     public void addBooksFromFiles(){
         try{
             for (Genre genre : genres) {
@@ -46,9 +47,11 @@ public class Home extends JPanel {
         }
     }
 
+    //Constructor, initailizes Home Page
     public Home(PanelsManager manager) {
         this.manager = manager;
 
+        //Adds books from the txt files to fill library at the beginning
          addBooksFromFiles();
 
         String fontFamily = "Avenir";
@@ -107,7 +110,7 @@ public class Home extends JPanel {
                 repaint();
             }
         });
-        
+        //Adds previously declared buttons to home page
         add(new JLabel());
         add(homeTitle);
         add(new JLabel());
@@ -129,13 +132,14 @@ public class Home extends JPanel {
         add(returnButton);
         add(new JLabel());
 
-
+        //Adds buttons to display books of different genres.
         for (Genre genre : genres) {
             String genreString = genre.toString();
             JButton genreButton = new JButton(genreString);
             genreButton.setFont(mainFont);
             genreButton.setHorizontalAlignment(JButton.CENTER);
 
+            //Gives buttons functionality to show books
             genreButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -173,7 +177,7 @@ public class Home extends JPanel {
             }
 
         }
-
+        //Gives buttons functionality to show other panels
         openProfileButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {

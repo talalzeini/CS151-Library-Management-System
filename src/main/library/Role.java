@@ -5,6 +5,7 @@ public enum Role {
     LIBRARIAN,
     AUTHOR;
 
+    //toString method to convert enum into a string
     public String toString(){
         switch(this){
             case MEMBER: return("member");
