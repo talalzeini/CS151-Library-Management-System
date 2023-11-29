@@ -104,6 +104,9 @@ public class SearchBooks extends JPanel {
                 // Trim the input string
                 String trimmedISBN = searchedText.trim();
 
+                // Reset dual purpose error label
+                labels.get(0).setForeground(Color.white);
+
                 // Check if the trimmed string is a number
                 if (trimmedISBN.matches("\\d+")) {
                       labels.get(0).setText(bookList.get(0));
@@ -112,10 +115,13 @@ public class SearchBooks extends JPanel {
                     }
                 } else {
                     for (int i = 0; i < 5; i++){
-                        if (!trimmedISBN.isEmpty()) {
+                        if (!trimmedISBN.isEmpty() && !bookList.get(0).isEmpty()) {
                             labels.get(i).setText(bookList.get(i));
                         } else {
                             labels.get(i).setText("");
+                            labels.get(0).setForeground(new Color(230,48,79));
+                            labels.get(0).setText("No books found containing specified search criteria.");
+
                         }
                     }
                 }
